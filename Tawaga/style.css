@@ -171,8 +171,8 @@ button:hover {
 .gem {
     width: 50%;
     height: 50%;
-    background-color: maroon;
-    border-radius: 50%;
+    background-size: cover;
+    background-image: url('gem.svg');
 }
 
 .init {
