@@ -163,8 +163,9 @@ button:hover {
     height: 75%;
     max-width: 75% !important;
     max-height: 75% !important;
-    border: 1vh solid var(--fs);
-    border-radius: 50%;
+    /*border: 1vh solid var(--fs);*/
+    background-size: cover;
+    background-image: url('characters.svg');
 }
 
 .gem {
