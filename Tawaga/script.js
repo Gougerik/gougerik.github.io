@@ -10,7 +10,6 @@ var cols = 5;
 $(document).ready(function () {
     $('#loader').css("display", "none");
     $('#home').css("display", "flex");
-    //Render(rows, cols);
 });
 
 function Render(numrows, numcols) {
@@ -27,7 +26,6 @@ function Render(numrows, numcols) {
     cols = numcols;
     Melee(1, 1);
     Gem();
-    //$('#canvas').html('<p class="middle">Wrong parameters! Size must be at least 5x5 and maximum 20x20!</p>');
 }
 
 function Melee(posx, posy) {
@@ -75,6 +73,7 @@ $('#initBtn').click(function () {
     } else {
         $('#canvas').html('<p class="middle" id="initText"></p>');
         $('#initText').append('<span class="init text-center">Wrong parameters!</span><br>');
+        $('#initText').append('Min. Size: <span class="init">5 x 5</span><br>');
         $('#initText').append('Max. Size: <span class="init">20 x 20</span><br>');
         $('#initText').append('Max. Countdown: <span class="init">60 min.</span>');
     }
