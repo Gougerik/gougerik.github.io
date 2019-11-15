@@ -38,6 +38,12 @@ body {
     width: 100vmax;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 h1,
 h2,
 h3,
@@ -165,7 +171,7 @@ button:hover {
     max-height: 75% !important;
     /*border: 1vh solid var(--fs);*/
     background-size: cover;
-    background-image: url('characters.svg');
+    background-image: url('character.svg');
 }
 
 .gem {

@@ -3,6 +3,7 @@ var y = 0;
 var gemx = 0;
 var gemy = 0;
 var gems = 0;
+var record = 0;
 var rows = 5;
 var cols = 5;
 
@@ -68,8 +69,18 @@ $('#initBtn').click(function () {
     var numrows = $('input[name="rows"]').val();
     var timeleft = $('input[name="time"]').val();
     if (numrows <= 20 && numcols <= 20 && numrows >= 5 && numcols >= 5 && timeleft >= 1 && timeleft <= 60) {
-        Start(timeleft);
-        Render(numcols, numrows);
+        var timer = 3,
+            minutes, seconds;
+        var countdown = setInterval(function () {
+            seconds = parseInt(timer % 60, 10);
+            seconds = seconds < 10 ? seconds : seconds;
+            $('#canvas').html('<h1 class="middle init">' + seconds + '</h1>');
+            if (--timer < 0) {
+                clearInterval(countdown);
+                Start(timeleft);
+                Render(numcols, numrows);
+            }
+        }, 1000);
     } else {
         $('#canvas').html('<p class="middle" id="initText"></p>');
         $('#initText').append('<span class="init text-center">Wrong parameters!</span><br>');
@@ -91,9 +102,14 @@ function Start(cd) {
         $('#timeleft').html(minutes + ":" + seconds);
         if (--timer < 0) {
             $('#timeleft').html("00:00");
-            $('#canvas').html('<p class="middle text-center" id="initText"></p>');
-            $('#initText').append('Finish!<br>');
+            $('#canvas').html('<p class="middle" id="initText"></p>');
+            $('#initText').append('<span class="text-center">Finish!</span>');
             $('#initText').append('Collected Gems: <span class="init">' + gems + '</span><br>');
+            if (gems > record) {
+                record = gems;
+                $('#initText').append('<br><span class="text-center init">New Record!</span>');
+                $('#record').html(record);
+            }
             $('#gems').html('0');
             $('#initBtn').html('Replay');
             gems = 0;
