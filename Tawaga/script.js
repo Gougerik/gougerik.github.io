@@ -70,7 +70,9 @@ function Collect() {
     Gem();
 }
 $('#initBtn').click(function () {
+    var rsg;
     clearInterval(countdown);
+    clearInterval(rsg);
     paused = 1;
     this.blur()
     var numcols = $('input[name="columns"]').val();
@@ -80,7 +82,7 @@ $('#initBtn').click(function () {
     if (numrows <= 20 && numcols <= 20 && numrows >= 5 && numcols >= 5 && timeleft >= 1 && timeleft <= 60) {
         var timer = 3,
             minutes, seconds;
-        var rsg = setInterval(function () {
+        rsg = setInterval(function () {
             seconds = parseInt(timer % 60, 10);
             seconds = seconds < 10 ? seconds : seconds;
             $('#canvas').html('<h1 class="middle init">' + seconds + '</h1>');
@@ -101,6 +103,7 @@ $('#initBtn').click(function () {
 });
 
 function Start(cd) {
+    clearInterval(countdown);
     var duration = 60 * cd;
     var timer = duration,
         minutes, seconds;
