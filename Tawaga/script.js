@@ -152,23 +152,26 @@ function Start(cd) {
 }
 
 function Pause() {
-    if (paused == 0) {
-        //console.log('Paused');
-        clearInterval(countdown);
-        paused = 1;
-        $('#canvas').css('opacity', '0.5');
-    } else if (paused == 1) {
-        var cd = $('#timeleft').html();
-        cd = ($('#timeleft').html()).split(':');
-        if (cd[1] < 10) {
-            cd = (cd[0]) + '.0' + (parseInt(cd[1] / 60 * 100));
-        } else {
-            cd = (cd[0]) + '.' + (parseInt(cd[1] / 60 * 100));
+    if (x >= 1 && y >= 1) {
+        $('#enter').addClass('hover');
+        if (paused == 0) {
+            //console.log('Paused');
+            clearInterval(countdown);
+            paused = 1;
+            $('#canvas').css('opacity', '0.5');
+        } else if (paused == 1) {
+            var cd = $('#timeleft').html();
+            cd = ($('#timeleft').html()).split(':');
+            if (cd[1] < 10) {
+                cd = (cd[0]) + '.0' + (parseInt(cd[1] / 60 * 100));
+            } else {
+                cd = (cd[0]) + '.' + (parseInt(cd[1] / 60 * 100));
+            }
+            //console.log('Resumed');
+            Start(cd);
+            paused = 0;
+            $('#canvas').css('opacity', '1');
         }
-        //console.log('Resumed');
-        Start(cd);
-        paused = 0;
-        $('#canvas').css('opacity', '1');
     }
 }
 $('.arrow').click(function () {
@@ -207,9 +210,7 @@ $(document).keydown(function (e) {
             $('.arrow#up').click();
             break;
         case 13: //enter
-            if (x >= 1 && y >= 1) {
-                Pause();
-            }
+            Pause();
             break;
         default:
             return;

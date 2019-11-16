@@ -36,6 +36,7 @@
                 <button class="arrow" id="down">&darr;</button>&nbsp;
                 <button class="arrow" id="right">&rarr;</button>
             </div>
+            <div style="width: 1OO% !important;"><button class="arrow" id="enter" style="width: 100%;" onclick="Pause();">Pause &#x23CE;</button></div>
         </legend>
         <div id="canvas">
             <p class="middle text-center">Set default parameters.</p>
@@ -47,6 +48,12 @@
     <!-- SCRIPTS IMPORT -->
     <script src="jquery.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#enter').parent().css('width', '100%');
+        });
+
+    </script>
 </body>
 
 </html>
