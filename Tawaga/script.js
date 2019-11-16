@@ -101,6 +101,7 @@ function Start(cd) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
         $('#timeleft').html(minutes + ":" + seconds);
         if (--timer < 0) {
+            Render(0, 0);
             $('#timeleft').html("00:00");
             $('#canvas').html('<p class="middle" id="initText"></p>');
             $('#initText').append('<span class="text-center">Finish!</span>');
@@ -111,8 +112,14 @@ function Start(cd) {
                 $('#record').html(record);
             }
             $('#gems').html('0');
+            $('#posx').html('0');
+            $('#posy').html('0');
             $('#initBtn').html('Replay');
             gems = 0;
+            rows = 0;
+            cols = 0;
+            gemx = 0;
+            gemy = 0;
             clearInterval(countdown);
         }
     }, 1000);
@@ -122,11 +129,11 @@ $('.arrow').click(function () {
     $('.arrow').removeClass('hover');
     //console.log(id);
     if (id == 'right') {
-        Melee((x - 1), y);
-        $('.arrow#left').addClass('hover');
-    } else if (id == 'left') {
         Melee((x + 1), y);
         $('.arrow#right').addClass('hover');
+    } else if (id == 'left') {
+        Melee((x - 1), y);
+        $('.arrow#left').addClass('hover');
     } else if (id == 'up') {
         Melee(x, (y - 1));
         $('.arrow#up').addClass('hover');
@@ -134,13 +141,16 @@ $('.arrow').click(function () {
         Melee(x, (y + 1));
         $('.arrow#down').addClass('hover');
     }
+    if (x == gemx && y == gemy) {
+        Collect();
+    }
 });
 $(document).keydown(function (e) {
     switch (e.which) {
-        case 37: // right
+        case 39: // right
             $('.arrow#right').click();
             break;
-        case 39: // left
+        case 37: // left
             $('.arrow#left').click();
             break;
         case 40: // down
@@ -151,9 +161,6 @@ $(document).keydown(function (e) {
             break;
         default:
             return;
-    }
-    if (x == gemx && y == gemy) {
-        Collect();
     }
     e.preventDefault();
 });
