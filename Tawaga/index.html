@@ -15,7 +15,7 @@
         <div class="loader"></div>
     </div>
     <section id="home">
-        <legend autocomplete="off">
+        <legend autocomplete="off" style="align-items: flex-start;align-self: flex-start;">
             <input type="number" name="columns" placeholder="Columns" value="5" required />
             <input type="number" name="rows" placeholder="Rows" value="5" required />
             <input type="number" name="time" placeholder="Countdown (Minutes)" required />
@@ -25,6 +25,14 @@
             <p>Time Left: <span class="init" id="timeleft">00:00</span></p>
             <p>Gems: <span class="init" id="gems">0</span></p>
             <p>Best Score: <span class="init" id="record">0</span></p>
+        </legend>
+        <legend style="align-items: center;align-self: flex-end;">
+            <div><button class="arrow" id="up">↑</button><br></div>
+            <div class="row">
+                <button class="arrow" id="left">←</button>&nbsp;
+                <button class="arrow" id="down">↓</button>&nbsp;
+                <button class="arrow" id="right">→</button>
+            </div>
         </legend>
         <div id="canvas">
             <p class="middle text-center">Set default parameters.</p>

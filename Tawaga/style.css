@@ -137,8 +137,6 @@ legend {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    align-self: flex-start;
     padding: 10px;
     font-size: 15px;
 }
@@ -162,6 +160,22 @@ button {
 
 button:hover {
     color: var(--def);
+}
+
+.arrow {
+    border-bottom: 5px solid #CACBA5;
+    border-right: 5px solid #95963B;
+    border-left: 5px solid #BABC55;
+}
+
+.arrow:hover {
+    color: var(--bg);
+}
+
+.arrow:active,
+.hover {
+    transform: scale(0.9);
+    color: var(--bg);
 }
 
 .player {

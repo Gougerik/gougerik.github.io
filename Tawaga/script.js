@@ -117,19 +117,37 @@ function Start(cd) {
         }
     }, 1000);
 }
+$('.arrow').click(function () {
+    var id = this.id;
+    $('.arrow').removeClass('hover');
+    //console.log(id);
+    if (id == 'right') {
+        Melee((x - 1), y);
+        $('.arrow#left').addClass('hover');
+    } else if (id == 'left') {
+        Melee((x + 1), y);
+        $('.arrow#right').addClass('hover');
+    } else if (id == 'up') {
+        Melee(x, (y - 1));
+        $('.arrow#up').addClass('hover');
+    } else if (id == 'down') {
+        Melee(x, (y + 1));
+        $('.arrow#down').addClass('hover');
+    }
+});
 $(document).keydown(function (e) {
     switch (e.which) {
         case 37: // right
-            Melee((x - 1), y);
+            $('.arrow#right').click();
             break;
         case 39: // left
-            Melee((x + 1), y);
+            $('.arrow#left').click();
             break;
         case 40: // down
-            Melee(x, (y + 1));
+            $('.arrow#down').click();
             break;
         case 38: //up
-            Melee(x, (y - 1));
+            $('.arrow#up').click();
             break;
         default:
             return;
