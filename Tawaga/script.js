@@ -115,16 +115,13 @@ function Start(cd) {
         $('#timeleft').html(minutes + ":" + seconds);
         if (--timer < 0) {
             var balance = parseInt((rows * cols * (gems / totcd)) / 10);
-            var columns = cols;
-            var row = rows;
-            Render(0, 0);
             $('#timeleft').html("00:00");
             $('#canvas').html('<p class="middle" id="initText"></p>');
             $('#initText').append('<span class="text-center">Finish!</span>');
             $('#initText').append('Collected Gems: <span class="init">' + gems + '</span><br>');
             $('#initText').append('Collected Credits:');
             $('#initText').append('<code class="text-center">((rows × columns × (gems ÷ minutes)) ÷ 10</code>');
-            $('#initText').append('<code class="text-center">((' + row + ' × ' + columns + ' × (' + gems + ' ÷ ' + totcd + ')) ÷ 10</code>');
+            $('#initText').append('<code class="text-center">((' + rows + ' × ' + cols + ' × (' + gems + ' ÷ ' + totcd + ')) ÷ 10</code>');
             $('#initText').append('<span class="init text-center">' + balance + '</span>');
             if (gems > record) {
                 record = gems;
@@ -152,8 +149,8 @@ function Start(cd) {
 }
 
 function Pause() {
+    $('#enter').addClass('hover');
     if (x >= 1 && y >= 1) {
-        $('#enter').addClass('hover');
         if (paused == 0) {
             //console.log('Paused');
             clearInterval(countdown);
