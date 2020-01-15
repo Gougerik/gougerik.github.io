@@ -22,7 +22,7 @@
                         $error = "You have to agree with Policy Privacy and Terms of Service!";
                     } else {
                         if($password !== $cpassword) {
-                            $error = 'Password do not contains!';
+                            $error = 'Passwords do not contains!';
                         } else {
                             $pass = hash('sha256',$password);
                             $query = mysqli_query($con, "INSERT INTO users (username,email,password,reg_date) VALUES ('$username','$email','$pass',now())")or die('Insertion error!');
@@ -89,7 +89,15 @@
             <label for="cpassword">Confirm Password</label>
             <input type="password" name="cpassword" id="cpassword" />
             <button type="submit">Sign Up</button>
-            <div><input type="checkbox" name="agree" id="agree" style="width: unset;"> <label for="agree">I agree with <a href="privacy.html" target="_blank">Privacy Policy</a> & <a href="terms.html" target="_blank">Terms of Service</a>.</label></div>
+            <div>
+                <input type="checkbox" name="agree" id="agree" onchange="Switch('agree');" hidden />
+                <div style="display: inline-block;">
+                    <div class="ccb-wrapper" onclick="$('#agree').click();">
+                        <div class="jockey toggle-off" id="toggle-agree"></div>
+                    </div>
+                </div>
+                <label for="agree"> I agree with <a href="privacy.html" target="_blank">Privacy Policy</a> & <a href="terms.html" target="_blank">Terms of Service</a>.</label>
+            </div>
             <div><span class="init"><?php echo '<br/>'.$error; ?></span></div>
         </form>
     </section>
@@ -100,6 +108,13 @@
             $('#loader').css('display','none');
             $('#home').css('display','flex');
         });
+        Switch = (id) => {
+            if (!$('#'+id).is(':checked')) {
+                $('#toggle-'+id).attr('class','jockey toggle-off');
+            } else {
+                $('#toggle-'+id).attr('class','jockey toggle-on');
+            }
+        }
     </script>
 </body>
 </html>

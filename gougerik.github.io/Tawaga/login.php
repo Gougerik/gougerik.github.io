@@ -74,7 +74,15 @@
             <label for="password">Password</label>
             <input type="password" name="password" id="password" />
             <button type="submit">Log In</button>
-            <div><input type="checkbox" style="width: unset;" name="remember" id="remember" /> <label for="remember">Stay logged in.</label></div>
+            <div>
+                <input type="checkbox" name="remember" id="remember" onchange="Switch('remember');" hidden />
+                <div style="display: inline-block;">
+                    <div class="ccb-wrapper" onclick="$('#remember').click();">
+                        <div class="jockey toggle-off" id="toggle-remember"></div>
+                    </div>
+                </div>
+                <label for="remember"> Stay logged in</label>
+            </div>
             <div><span class="init"><?php echo '<br/>'.$error; ?></span></div>
         </form>
     </section>
@@ -85,6 +93,13 @@
             $('#loader').css('display','none');
             $('#home').css('display','flex');
         });
+        Switch = (id) => {
+            if (!$('#'+id).is(':checked')) {
+                $('#toggle-'+id).attr('class','jockey toggle-off');
+            } else {
+                $('#toggle-'+id).attr('class','jockey toggle-on');
+            }
+        }
     </script>
 </body>
 </html>

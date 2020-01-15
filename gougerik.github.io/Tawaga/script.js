@@ -65,8 +65,10 @@ function Gem() {
 }
 
 function Collect() {
-    var rollSound = new Audio("sounds/score.wav");
-    rollSound.play();
+    if(sound) {
+        var rollSound = new Audio("sounds/score.wav");
+        rollSound.play();
+    }
     gems += 1;
     $('#gems').html(gems);
     Gem();
@@ -76,8 +78,10 @@ function Collect() {
 }
 
 function BlowUp() {
-    var rollSound = new Audio("sounds/bomb.wav");
-    rollSound.play();
+    if(sound) {
+        var rollSound = new Audio("sounds/bomb.wav");
+        rollSound.play();
+    }
     if (level > 1) {
         level -= 1;
     }
@@ -104,11 +108,15 @@ $('#initBtn').click(function () {
             seconds = parseInt(timer % 60, 10);
             seconds = seconds < 10 ? seconds : seconds;
             $('#canvas').html('<h1 class="middle init">' + seconds + '</h1>');
-            var rollSound = new Audio("sounds/countdown.wav");
-            rollSound.play();
-            if (--timer < 0) {
-                var rollSound = new Audio("sounds/start.wav");
+            if(sound) {
+                var rollSound = new Audio("sounds/countdown.wav");
                 rollSound.play();
+            }
+            if (--timer < 0) {
+                if(sound) {
+                    var rollSound = new Audio("sounds/start.wav");
+                    rollSound.play();
+                }
                 paused = 0;
                 clearInterval(rsg);
                 Start(timeleft);
@@ -136,8 +144,10 @@ function Start(cd) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
         $('#timeleft').html(minutes + ":" + seconds);
         if (--timer < 0) {
-            var rollSound = new Audio("sounds/victory.wav");
-            rollSound.play();
+            if(sound) {
+                var rollSound = new Audio("sounds/victory.wav");
+                rollSound.play();
+            }
             var balance = parseInt((rows * cols * (gems / totcd)) / 10);
             $('#timeleft').html("00:00");
             $('#canvas').html('<p class="middle" id="initText"></p>');
@@ -148,7 +158,7 @@ function Start(cd) {
             $('#initText').append('<code class="text-center">((' + rows + ' × ' + cols + ' × (' + gems + ' ÷ ' + totcd + ')) ÷ 10</code>');
             $('#initText').append('<span class="init text-center">' + balance + '</span>');
             credits = credits + balance;
-            if (gems > record) {
+            if (balance > record) {
                 record = credits;
                 $('#initText').append('<br><span class="text-center init">New Record!</span>');
                 $('#record').html(record);
@@ -159,7 +169,9 @@ function Start(cd) {
                 });
             }
             level += 1;
-            $('#balance').html(credits);
+            ccredits = (credits/1000).toFixed(2);
+            ccredits = ccredits+'k';
+            $('#balance').html(ccredits);
             $('#gems').html('0');
             $('#posx').html('0');
             $('#posy').html('0');
@@ -277,3 +289,13 @@ $(document).keydown(function (e) {
     }
     e.preventDefault();
 });
+
+Switch = (id,tar) => {
+    if ($('#'+id).is(':checked')) {
+        window[tar] = false;
+        $('#toggle-'+id).attr('class','jockey toggle-off');
+    } else {
+        window[tar] = true;
+        $('#toggle-'+id).attr('class','jockey toggle-on');
+    }
+}

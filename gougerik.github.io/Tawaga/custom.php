@@ -6,7 +6,10 @@
         $row = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users WHERE username = '$user'"));
         $id = $row['id'];
         $record = $row['record'];
-        $credits = $row['credits'];
+        $ccredits = $row['credits'];
+        $credits = number_format((float)(intval($row['credits'])/1000), 2, '.', '');
+        $credits = $credits.'k';
+        $sounds = $row['sounds_fx'];
     }
 ?>
 <!DOCTYPE html>
@@ -16,14 +19,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tawaga</title>
+    <title>Tawaga - Custom Game</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.webcoder.sk/projects/js/projects.js" data-sitekey="HwQAFY9Hn2lNbdGWk80JK1hV2sk2oz"></script>
 </head>
 
 <body>
     <header>
-    <?php if(!empty($_SESSION['user'])) { ?><a href="profile.php">Profile (<?php echo $user; ?>)</a><?php } else { ?><a href="signin.php?rf=custom">Sign In</a><?php } ?>
+        <a href="index.php">Home</a>
+    <?php if(!empty($_SESSION['user'])) { ?><a href="<?php echo 'user?rf=custom&id='.$id; ?>">Profile (<?php echo $user; ?>)</a><?php } else { ?><a href="signin.php?rf=custom">Sign In</a><?php } ?>
     </header>
     <nav>
         <p>Balance: <span class="init" id="balance"><?php echo (!empty($_SESSION['user'])) ? $credits : '0'; ?></span> <span class="init">Credits</span></p>
@@ -34,6 +37,15 @@
     </div>
     <section id="home">
         <legend autocomplete="off" style="align-items: flex-start;align-self: flex-start;">
+            <div>
+                <label for="bombs">Bombs: </label>
+                <input type="checkbox" name="bombs" id="bombs" onchange="Switch('bombs','bombs');" hidden />
+                <div style="display: inline-block;">
+                    <div class="ccb-wrapper" onclick="$('#bombs').click();">
+                        <div class="jockey toggle-on" id="toggle-bombs"></div>
+                    </div>
+                </div>
+            </div>
             <input type="number" name="columns" placeholder="Columns" value="5" required />
             <input type="number" name="rows" placeholder="Rows" value="5" required />
             <input type="number" name="time" placeholder="Countdown (Minutes)" required />
@@ -70,7 +82,10 @@
         });
         <?php
             if(!empty($_SESSION['user'])) {
-                echo 'credits = '.$credits.';record='.$record.';';
+                echo 'credits = '.$ccredits.';record='.$record.';';
+            }
+            if($sounds == false) {
+                echo 'sound = false;';
             }
         ?>
     </script>

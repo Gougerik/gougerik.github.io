@@ -133,6 +133,10 @@ p {
     justify-content: center;
 }
 
+.flex-wrapper {
+    display: flex;
+}
+
 form {
     margin: 0 1rem;
     width: 400px;
@@ -191,6 +195,75 @@ a:focus {
 .hover {
     transform: scale(1.1);
     color: var(--bg);
+}
+
+.bordered > p {
+    margin-bottom: 5px;
+}
+
+.bordered:link, .bordered:visited, .bordered {
+    color: var(--gray);
+    text-decoration: none;
+    text-align: center;
+    margin: 10px 20px;
+    opacity: 0.7;
+    border: 1px solid #666666;
+    padding: 5px 10px;
+    background-color: var(--init);
+    position: relative;
+}
+
+.bordered:hover, .bordered:focus {
+    opacity: 1;
+    margin: 5px 10px;
+    padding: 10px 20px;
+}
+
+.bordered.locked {
+    opacity: 0.4;
+}
+
+.bordered.locked > img {
+    filter: blur(20px);
+}
+
+.bordered.locked:hover, .bordered.locked:focus {
+    padding: 5px 10px;
+    margin: 10px 20px;
+    opacity: 0.4;
+}
+
+.ccb-wrapper {
+    height: 20px;
+    width: 40px;
+    border: 1px solid var(--def);
+    background-color: var(--init);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 0;
+}
+
+.ccb-wrapper:hover, .ccb-wrapper:focus {
+    cursor: pointer;
+}
+
+.jockey {
+    height: 100%;
+    width: 50%;
+}
+
+.toggle-on {
+    align-self: flex-end;
+    background-color: var(--def);
+}
+
+.toggle-off {
+    align-self: flex-start;
+    background-color: var(--gray);
 }
 
 .melee.andrew > .player {
