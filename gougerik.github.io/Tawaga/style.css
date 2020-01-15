@@ -4,6 +4,7 @@
     --def: #FDFF7A;
     --init: #000021;
     --fs: #E4520B;
+    --gray: #CACBA5;
 }
 
 @font-face {
@@ -36,6 +37,12 @@ body {
     height: 100%;
     font-size: 20px;
     width: 100vmax;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 h1,
@@ -126,13 +133,16 @@ p {
     justify-content: center;
 }
 
+form {
+    margin: 0 1rem;
+    width: 400px;
+}
+
 legend {
     position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    align-self: flex-start;
     padding: 10px;
     font-size: 15px;
 }
@@ -146,6 +156,7 @@ button {
     color: #ffffff;
     padding: 5px 0px;
     text-align: center;
+    text-decoration: none;
 }
 
 button {
@@ -158,27 +169,161 @@ button:hover {
     color: var(--def);
 }
 
+a:link, a:visited {
+    color: blue;
+}
+
+a:focus {
+    color: red;
+}
+
+.arrow {
+    border-bottom: 5px solid var(--gray);
+    border-right: 5px solid #95963B;
+    border-left: 5px solid #BABC55;
+}
+
+.arrow:hover {
+    color: var(--bg);
+}
+
+.arrow:active,
+.hover {
+    transform: scale(1.1);
+    color: var(--bg);
+}
+
+.melee.andrew > .player {
+    opacity: 0.5;
+}
+
 .player {
     width: 75%;
     height: 75%;
     max-width: 75% !important;
     max-height: 75% !important;
-    border: 1vh solid var(--fs);
-    border-radius: 50%;
+    /*border: 1vh solid var(--fs);*/
+    background-size: cover;
+    background-image: url('dirnone.svg');
+    transition: all .5s ease;
+}
+
+.andrew > .player {
+    transform: rotate(45deg);
+
 }
 
 .gem {
     width: 50%;
     height: 50%;
-    background-color: maroon;
-    border-radius: 50%;
+    background-size: cover;
+    background-image: url('gem.svg');
 }
 
 .init {
     color: var(--fs);
 }
 
+header,footer {
+    width: -webkit-fill-available;
+    font-size: 15px;
+    margin: 10px;
+    position: absolute;
+}
+
+footer {
+    bottom: 0;
+}
+
+header {
+    top: 0;
+}
+
+nav {
+    position: absolute;
+    top: 0;
+    margin: 10px;
+    font-size: 20px;
+}
+
+code {
+    font-size: 10px;
+    color: var(--gray);
+}
+
+form {
+    font-size: 15px;
+}
+
+.dir-right {
+    background-image: url('character.svg');
+    transform: rotate(90deg);
+    animation-name: move-right;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+.dir-left {
+    background-image: url('character.svg');
+    transform: rotate(-90deg);
+    animation-name: move-left;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+.dir-up {
+    background-image: url('character.svg');
+    transform: rotate(0);
+    animation-name: move-up;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+.dir-down {
+    background-image: url('character.svg');
+    transform: rotate(180deg);
+    animation-name: move-down;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
 /* FEATURES */
+@keyframes move-right {
+    0% {
+        margin-left: -100%;
+    }
+    100% {
+        margin-left: 0;
+    }
+}
+
+@keyframes move-left {
+    0% {
+        margin-right: -100%;
+    }
+    100% {
+        margin-right: 0;
+    }
+}
+
+@keyframes move-down {
+    0% {
+        margin-top: -100%;
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+
+@keyframes move-up {
+    0% {
+        margin-bottom: -100%;
+    }
+    100% {
+        margin-bottom: 0;
+    }
+}
+
 @keyframes loader {
     12.5% {
         content: "";
@@ -208,3 +353,4 @@ button:hover {
         content: "";
     }
 }
+
