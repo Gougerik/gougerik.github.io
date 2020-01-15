@@ -133,6 +133,11 @@ p {
     justify-content: center;
 }
 
+form {
+    margin: 0 1rem;
+    width: 400px;
+}
+
 legend {
     position: absolute;
     display: flex;
@@ -151,6 +156,7 @@ button {
     color: #ffffff;
     padding: 5px 0px;
     text-align: center;
+    text-decoration: none;
 }
 
 button {
@@ -161,6 +167,14 @@ button {
 
 button:hover {
     color: var(--def);
+}
+
+a:link, a:visited {
+    color: blue;
+}
+
+a:focus {
+    color: red;
 }
 
 .arrow {
@@ -179,6 +193,10 @@ button:hover {
     color: var(--bg);
 }
 
+.melee.andrew > .player {
+    opacity: 0.5;
+}
+
 .player {
     width: 75%;
     height: 75%;
@@ -186,7 +204,13 @@ button:hover {
     max-height: 75% !important;
     /*border: 1vh solid var(--fs);*/
     background-size: cover;
-    background-image: url('character.svg');
+    background-image: url('dirnone.svg');
+    transition: all .5s ease;
+}
+
+.andrew > .player {
+    transform: rotate(45deg);
+
 }
 
 .gem {
@@ -200,12 +224,19 @@ button:hover {
     color: var(--fs);
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    margin: 10px;
-    font-size: 15px;
+header,footer {
     width: -webkit-fill-available;
+    font-size: 15px;
+    margin: 10px;
+    position: absolute;
+}
+
+footer {
+    bottom: 0;
+}
+
+header {
+    top: 0;
 }
 
 nav {
@@ -220,7 +251,79 @@ code {
     color: var(--gray);
 }
 
+form {
+    font-size: 15px;
+}
+
+.dir-right {
+    background-image: url('character.svg');
+    transform: rotate(90deg);
+    animation-name: move-right;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+.dir-left {
+    background-image: url('character.svg');
+    transform: rotate(-90deg);
+    animation-name: move-left;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+.dir-up {
+    background-image: url('character.svg');
+    transform: rotate(0);
+    animation-name: move-up;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+.dir-down {
+    background-image: url('character.svg');
+    transform: rotate(180deg);
+    animation-name: move-down;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
 /* FEATURES */
+@keyframes move-right {
+    0% {
+        margin-left: -100%;
+    }
+    100% {
+        margin-left: 0;
+    }
+}
+
+@keyframes move-left {
+    0% {
+        margin-right: -100%;
+    }
+    100% {
+        margin-right: 0;
+    }
+}
+
+@keyframes move-down {
+    0% {
+        margin-top: -100%;
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+
+@keyframes move-up {
+    0% {
+        margin-bottom: -100%;
+    }
+    100% {
+        margin-bottom: 0;
+    }
+}
+
 @keyframes loader {
     12.5% {
         content: "";
@@ -250,3 +353,4 @@ code {
         content: "";
     }
 }
+
