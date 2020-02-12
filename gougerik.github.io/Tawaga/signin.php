@@ -28,7 +28,7 @@
             }
         }
     }
-    $rf = (!empty($_GET['rf'])) ? $_GET['rf'] : 'index';
+    $rf = (!empty($_GET['rf'])) ? $_GET['rf'] : 'index.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +43,7 @@
 
 <body>
     <header>
-        <a href="<?php echo $rf; ?>.php">Back</a>
+        <a href="<?php echo $rf; ?>">Back</a>
     </header>
     <div id="loader">
         <p>Loading</p>

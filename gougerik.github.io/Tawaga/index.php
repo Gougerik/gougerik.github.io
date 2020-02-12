@@ -23,7 +23,8 @@
 
 <body>
     <header>
-    <?php if(!empty($_SESSION['user'])) { ?><a href="<?php echo 'user?rf=custom&id='.$id; ?>">Profile (<?php echo $user; ?>)</a><?php } else { ?><a href="signin.php?rf=custom">Sign In</a><?php } ?>
+    <?php if(!empty($_SESSION['user'])) { ?><a href="<?php echo 'user?id='.$id; ?>">Profile (<?php echo $user; ?>)</a><?php } else { ?><a href="signin.php">Sign In</a><?php } ?>
+        <a href="leaderboard.php">Leaderboard</a>
     </header>
     <nav>
     <?php if(!empty($_SESSION['user'])) { ?><p>Balance: <span class="init" id="balance"><?php echo (!empty($_SESSION['user'])) ? $credits : '0'; ?></span> <span class="init">Credits</span></p><?php } ?>
@@ -37,12 +38,12 @@
         <h3 class="init">Select game</h3><br/>
         <div class="flex-wrapper">
             <a href="custom.php" class="bordered"><p>Custom</p><img src="img/custom.svg" class="img-fluid" width="300px" alt="Image"></a>
+            <a href="competitive.php" class="bordered"><p>Competitive</p><img src="img/arcade.svg" class="img-fluid" width="300px" alt="Image"></a>
             <?php if(!empty($_SESSION['user'])) { ?>
             <a href="campaign" class="bordered"><p>Campaign</p><img src="img/campaign.svg" class="img-fluid" width="300px" alt="Image"></a>
             <?php } else { ?>
             <div class="bordered locked"><p>Locked (Campaign)</p><img src="img/campaign.svg" class="img-fluid" width="300px" alt="Image"></div>
             <?php } ?>
-            <div class="bordered locked"><p>Locked (Arcade)</p><img src="img/arcade.svg" class="img-fluid" width="300px" alt="Image"></div>
         </div>
     </section>
     <footer>

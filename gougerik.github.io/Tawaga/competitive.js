@@ -1,11 +1,8 @@
 var rows, cols;
 rows = cols = 5;
-var paused, level;
-paused = level = 1;
-var x, y, gemx, gemy, bombx, bomby, gems, record, credits, countdown, totcd;
-x = y = gemx = gemy = bombx = bomby = gems = record = credits = countdown = totcd = 0;
-var bombs, campaign;
-bombs = sound = false;
+var x1, y1, x2, y2, gemx, gemy, bombx, bomby, gems1, gems2, countdown, totcd, paused;
+x1 = y1 = x2 = y2 = gemx = gemy = bombx = bomby = gems1 = gems2 = countdown = totcd = paused = 0;
+var bombs = false;
 var sound = true;
 
 var pw = '';
@@ -28,9 +25,7 @@ function Render(numrows, numcols) {
     rows = numrows;
     cols = numcols;
     Melee(1, 1, 'none');
-    if(campaign) {
-        GenWalls();
-    }
+    Andrew(rows, cols, 'none');
     Gem();
     if (bombs) {
         Bomb();
@@ -44,11 +39,34 @@ function Melee(posx, posy, dir) {
         $('.melee').removeClass('melee');
         $("#row" + posy + " > #block" + posx).addClass('melee');
         $('.melee').html('<div class="player"></div>');
-        $('.player').addClass('dir-'+dir);
-        $('#posx').html(posx);
-        $('#posy').html(posy);
-        x = posx;
-        y = posy;
+        $('.andrew').html('<div class="player"></div>');
+        $('.melee > .player').addClass('dir-'+dir);
+        $('#posx1').html(posx);
+        $('#posy1').html(posy);
+        x1 = posx;
+        y1 = posy;
+        if(x1 == x2 && y1 == y2) {
+            $('.melee').addClass('andrew');
+        }
+    }
+}
+
+function Andrew(posx, posy, dir) {
+    if (posx >= 1 && posy >= 1 && posy <= cols && posx <= rows && paused == 0) {
+        //console.log('Rendering Player at x: ' + posx + ', y: ' + posy);
+        $('.andrew').html("");
+        $('.andrew').removeClass('andrew');
+        $("#row" + posy + " > #block" + posx).addClass('andrew');
+        $('.andrew').html('<div class="player"></div>');
+        $('.melee').html('<div class="player"></div>');
+        $('.andrew > .player').addClass('dir-'+dir);
+        $('#posx2').html(posx);
+        $('#posy2').html(posy);
+        x2 = posx;
+        y2 = posy;
+        if(x1 == x2 && y1 == y2) {
+            $('.andrew').addClass('melee');
+        }
     }
 }
 
@@ -56,7 +74,7 @@ function Gem() {
     if (paused == 0) {
         var xr = Math.floor(Math.random() * Math.floor(rows)) + 1;
         var yr = Math.floor(Math.random() * Math.floor(cols)) + 1;
-        if (yr !== y && xr !== x && yr !== bomby && xr !== bombx) {
+        if (yr !== y1 && xr !== x1 && yr !== y2 && xr !== x2 && yr !== bomby && xr !== bombx) {
             $('.treasure').html('<div class="player"></div>');
             $('.treasure').removeClass('treasure');
             $("#row" + yr + " > #block" + xr).addClass('treasure');
@@ -75,38 +93,47 @@ function Gem() {
     }
 }
 
-function Collect() {
+function Collect(player) {
     if(sound) {
         var rollSound = new Audio(pw+"sounds/score.wav");
         rollSound.play();
     }
-    gems += 1;
-    $('#gems').html(gems);
+    if(player == 1) {
+        gems1 += 1;
+        $('#gems1').html(gems1);
+    } else if(player == 2) {
+        gems2 += 1;
+        $('#gems2').html(gems2);
+    }
     Gem();
     if (bombs) {
         Bomb();
     }
 }
 
-function BlowUp() {
+function BlowUp(player) {
     if(sound) {
         var rollSound = new Audio(pw+"sounds/bomb.wav");
         rollSound.play();
     }
-    if (level > 1) {
-        level -= 1;
-    }
-    posx = 1;
-    posy = 1;
+    posx1 = 1;
+    posy1 = 1;
+    posx2 = rows;
+    posy2 = cols;
     bombx = 0;
     bomby = 0;
-    $('#posx').html(posx);
-    $('#posy').html(posy);
+    $('#posx1').html(posx1);
+    $('#posy1').html(posy1);
+    $('#posx2').html(posx2);
+    $('#posy2').html(posy2);
     $('#bombx').html(bombx);
     $('#bomby').html(bomby);
-    $('#level').html(level);
     paused = 1;
-    $('#canvas').html('<p class="init middle">You blown up!</p>');
+    if(player == 1) {
+        $('#canvas').html('<p class="init middle">Player 2 wins!</p>');
+    } else if(player == 2) {
+        $('#canvas').html('<p class="init middle">Player 1 wins!</p>');
+    }
     $('#initBtn').html('Replay');
     clearInterval(countdown);
 }
@@ -119,11 +146,6 @@ $('#initBtn').click(function () {
     var numcols = $('input[name="columns"]').val();
     var numrows = $('input[name="rows"]').val();
     var timeleft = $('input[name="time"]').val();
-    if(campaign) {
-        numcols = cols;
-        numrows = rows;
-        timeleft = cdtl;
-    }
     totcd = timeleft;
     if (numrows <= 20 && numcols <= 20 && numrows >= 5 && numcols >= 5 && timeleft >= 1 && timeleft <= 60) {
         var timer = 3,
@@ -168,123 +190,51 @@ function Start(cd) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
         $('#timeleft').html(minutes + ":" + seconds);
         if (--timer < 0) {
-            if(campaign) {
-                if(gems >= goal) {
-                    if(sound) {
-                        var rollSound = new Audio(pw+"sounds/victory.wav");
-                        rollSound.play();
-                    }
-                    $('#timeleft').html("00:00");
-                    $('#canvas').html('<p class="middle" id="initText"></p>');
-                    $('#initText').append('<span class="text-center">Level completed!</span>');
-                    $('#initText').append('Collected Gems: <span class="init">' + gems + '</span><br>');
-                    $('#initText').append('Collected Credits: <span class="init">'+prize+'</span>');
-                    credits = credits + prize;
-                    $.ajax({
-                        type: 'post',
-                        url: '../init/levelup.php',
-                        data: { passed:level }
-                    });
-                } else {
-                    if(sound) {
-                        var rollSound = new Audio(pw+"sounds/lose.wav");
-                        rollSound.play();
-                    }
-                    $('#timeleft').html("00:00");
-                    $('#canvas').html('<p class="middle" id="initText"></p>');
-                    $('#initText').append('<span class="text-center">Level failed!</span>');
-                    $('#initText').append('Collected Gems: <span class="init">' + gems + '</span><br>');
-                    $('#initText').append('Collected Credits: <span class="init">0</span>');
-                }
-            } else {
-                if(sound) {
-                    var rollSound = new Audio(pw+"sounds/victory.wav");
-                    rollSound.play();
-                }
-                var balance = parseInt((rows * cols * (gems / totcd)) / 10);
-                $('#timeleft').html("00:00");
-                $('#canvas').html('<p class="middle" id="initText"></p>');
-                $('#initText').append('<span class="text-center">Finish!</span>');
-                $('#initText').append('Collected Gems: <span class="init">' + gems + '</span><br>');
-                $('#initText').append('Collected Credits:');
-                $('#initText').append('<code class="text-center">((rows × columns × (gems ÷ minutes)) ÷ 10</code>');
-                $('#initText').append('<code class="text-center">((' + rows + ' × ' + cols + ' × (' + gems + ' ÷ ' + totcd + ')) ÷ 10</code>');
-                $('#initText').append('<span class="init text-center">' + balance + '</span>');
-                credits = credits + balance;
-                if (balance > record) {
-                    record = credits;
-                    $('#initText').append('<br><span class="text-center init">New Record!</span>');
-                    $('#record').html(record);
-                    $.ajax({
-                        type: 'POST',
-                        url: pw+'init/record.php',
-                        data: { record:record }
-                    });
-                }
-                level += 1;
+            if(sound) {
+                var rollSound = new Audio(pw+"sounds/victory.wav");
+                rollSound.play();
             }
-            ccredits = (credits/1000).toFixed(2);
-            ccredits = ccredits+'k';
-            $('#balance').html(ccredits);
-            $('#gems').html('0');
-            $('#posx').html('0');
-            $('#posy').html('0');
+            var winner = 0;
+            if(gems1 > gems2) {
+                winner = 1;
+            } else if(gems1 < gems2) {
+                winner = 2;
+            }
+            $('#timeleft').html("00:00");
+            $('#canvas').html('<p class="middle" id="initText"></p>');
+            $('#initText').append('<span class="text-center">Finish!</span>');
+            $('#initText').append('Collected Gems: <span class="init">' + gems1 + ' + '+ gems2 + '</span><br>');
+            $('#initText').append('Player wins: <span class="init">' + winner + '</span>');
+            $('#gems1').html('0');
+            $('#gems2').html('0');
+            $('#posx1').html('0');
+            $('#posy1').html('0');
+            $('#posx2').html('0');
+            $('#posy2').html('0');
             $('#bombx').html('0');
             $('#bomby').html('0');
-            $('#level').html(level);
             $('#initBtn').html('Replay');
             gems = 0;
-            if(!campaign) {
-            rows = 0;
-            cols = 0;
-            }
             bombx = 0;
             bomby = 0;
             gemx = 0;
             gemy = 0;
-            x = 0;
-            y = 0;
+            x1 = 0;
+            y1 = 0;
+            x2 = 0;
+            y2 = 0;
             totcd = 0;
             paused = 1;
             clearInterval(countdown);
-            $.ajax({
-                type: 'POST',
-                url: pw+'init/credits.php',
-                data: { credits:credits }
-            });
         }
     }, 1000);
-}
-
-function Pause() {
-    $('#enter').addClass('hover');
-    if (x >= 1 && y >= 1) {
-        if (paused == 0) {
-            //console.log('Paused');
-            clearInterval(countdown);
-            paused = 1;
-            $('#canvas').css('opacity', '0.5');
-        } else if (paused == 1) {
-            var cd = $('#timeleft').html();
-            cd = ($('#timeleft').html()).split(':');
-            if (cd[1] < 10) {
-                cd = (cd[0]) + '.0' + (parseInt(cd[1] / 60 * 100));
-            } else {
-                cd = (cd[0]) + '.' + (parseInt(cd[1] / 60 * 100));
-            }
-            //console.log('Resumed');
-            Start(cd);
-            paused = 0;
-            $('#canvas').css('opacity', '1');
-        }
-    }
 }
 
 function Bomb() {
     if (paused == 0) {
         var xr = Math.floor(Math.random() * Math.floor(rows)) + 1;
         var yr = Math.floor(Math.random() * Math.floor(cols)) + 1;
-        if (yr !== y && xr !== x && yr !== gemy && xr !== gemx) {
+        if (yr !== y1 && xr !== x1 && yr !== y2 && xr !== x2 && yr !== gemy && xr !== gemx) {
             $('.bomb').html("");
             $('.bomb').removeClass('bomb');
             $("#row" + yr + " > #block" + xr).addClass('bomb');
@@ -300,40 +250,68 @@ function Bomb() {
     }
 }
 
-function Wall(x,y) {
-    $('#row' +x+ ' > #block' + y).addClass('wall');
-}
-
 $('.arrow').click(function () {
     var id = this.id;
     $('.arrow').removeClass('hover');
     //console.log(id);
     if (id == 'right') {
-        if(!$('#row'+y+' > #block'+(x+1)).hasClass('wall')) {
-            Melee((x + 1), y, 'right');
+        if(!$('#row'+y1+' > #block'+(x1+1)).hasClass('wall')) {
+            Melee((x1 + 1), y1, 'right');
             $('.arrow#right').addClass('hover');
         }
     } else if (id == 'left') {
-        if(!$('#row'+y+' > #block'+(x-1)).hasClass('wall')) {
-            Melee((x - 1), y, 'left');
+        if(!$('#row'+y1+' > #block'+(x1-1)).hasClass('wall')) {
+            Melee((x1 - 1), y1, 'left');
             $('.arrow#left').addClass('hover');
         }
     } else if (id == 'up') {
-        if(!$('#row'+(y-1)+' > #block'+x).hasClass('wall')) {
-            Melee(x, (y - 1), 'up');
+        if(!$('#row'+(y1-1)+' > #block'+x1).hasClass('wall')) {
+            Melee(x1, (y1 - 1), 'up');
             $('.arrow#up').addClass('hover');
         }
     } else if (id == 'down') {
-        if(!$('#row'+(y+1)+' > #block'+x).hasClass('wall')) {
-            Melee(x, (y + 1), 'down');
+        if(!$('#row'+(y1+1)+' > #block'+x1).hasClass('wall')) {
+            Melee(x1, (y1 + 1), 'down');
             $('.arrow#down').addClass('hover');
         }
     }
-    if (x == gemx && y == gemy && paused == 0) {
-        Collect();
+    if (x1 == gemx && y1 == gemy && paused == 0) {
+        Collect(1);
     }
-    if (x == bombx && y == bomby && paused == 0) {
-        BlowUp();
+    if (x1 == bombx && y1 == bomby && paused == 0) {
+        BlowUp(1);
+    }
+});
+$('.wasd').click(function () {
+    var id = this.id;
+    $('.wasd').removeClass('hover');
+    //console.log(id);
+    if (id == 'right') {
+        if(!$('#row'+y2+' > #block'+(x2+1)).hasClass('wall')) {
+            Andrew((x2 + 1), y2, 'right');
+            $('.wasd#right').addClass('hover');
+        }
+    } else if (id == 'left') {
+        if(!$('#row'+y2+' > #block'+(x2-1)).hasClass('wall')) {
+            Andrew((x2 - 1), y2, 'left');
+            $('.wasd#left').addClass('hover');
+        }
+    } else if (id == 'up') {
+        if(!$('#row'+(y2-1)+' > #block'+x2).hasClass('wall')) {
+            Andrew(x2, (y2 - 1), 'up');
+            $('.wasd#up').addClass('hover');
+        }
+    } else if (id == 'down') {
+        if(!$('#row'+(y2+1)+' > #block'+x2).hasClass('wall')) {
+            Andrew(x2, (y2 + 1), 'down');
+            $('.wasd#down').addClass('hover');
+        }
+    }
+    if (x2 == gemx && y2 == gemy && paused == 0) {
+        Collect(2);
+    }
+    if (x2 == bombx && y2 == bomby && paused == 0) {
+        BlowUp(2);
     }
 });
 $(document).keydown(function (e) {
@@ -350,8 +328,17 @@ $(document).keydown(function (e) {
         case 38: //up
             $('.arrow#up').click();
             break;
-        case 13: //enter
-            Pause();
+        case 68: // right
+            $('.wasd#right').click();
+            break;
+        case 65: // left
+            $('.wasd#left').click();
+            break;
+        case 83: // down
+            $('.wasd#down').click();
+            break;
+        case 87: //up
+            $('.wasd#up').click();
             break;
         default:
             return;

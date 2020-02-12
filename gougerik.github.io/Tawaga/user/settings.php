@@ -35,7 +35,8 @@
                 $error = 'If you want to change your password you need to fill all password fields.';
             }
         } elseif(!empty($_POST['username'])) {
-            $username = $_POST['username'];
+            $username = stripslashes($_POST['username']);
+            $username = preg_replace('/[^A-Za-z0-9\-\(\) ]/', '', $username);
             $query = mysqli_query($con, "UPDATE users SET username = '$username' WHERE username = '$user'");
             $_SESSION['user'] = $username;
             header('location: settings.php');

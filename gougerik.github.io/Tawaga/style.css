@@ -90,6 +90,20 @@ p {
     box-sizing: unset !important;
 }
 
+#leaderboard {
+    width: 400px;
+    margin: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid var(--def);
+    text-align: center;
+}
+
+#leaderboard > p {
+    padding: 5px;
+}
+
 .row {
     display: flex;
     flex-direction: row;
@@ -181,17 +195,17 @@ a:focus {
     color: red;
 }
 
-.arrow {
+.arrow,.wasd {
     border-bottom: 5px solid var(--gray);
     border-right: 5px solid #95963B;
     border-left: 5px solid #BABC55;
 }
 
-.arrow:hover {
+.arrow:hover,.wasd:hover {
     color: var(--bg);
 }
 
-.arrow:active,
+.arrow:active, .wasd:active,
 .hover {
     transform: scale(1.1);
     color: var(--bg);
@@ -220,17 +234,17 @@ a:focus {
 }
 
 .bordered.locked {
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 .bordered.locked > img {
-    filter: blur(20px);
+    /*filter: blur(20px);*/
 }
 
 .bordered.locked:hover, .bordered.locked:focus {
     padding: 5px 10px;
     margin: 10px 20px;
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 .ccb-wrapper {
@@ -266,24 +280,18 @@ a:focus {
     background-color: var(--gray);
 }
 
-.melee.andrew > .player {
-    opacity: 0.5;
-}
-
 .player {
     width: 75%;
     height: 75%;
     max-width: 75% !important;
     max-height: 75% !important;
-    /*border: 1vh solid var(--fs);*/
     background-size: cover;
-    background-image: url('dirnone.svg');
     transition: all .5s ease;
 }
 
-.andrew > .player {
-    transform: rotate(45deg);
-
+.wall {
+    background-image: url('wall.svg') !important;
+    background-size: cover;
 }
 
 .gem {
@@ -329,7 +337,6 @@ form {
 }
 
 .dir-right {
-    background-image: url('character.svg');
     transform: rotate(90deg);
     animation-name: move-right;
     animation-duration: .5s;
@@ -337,7 +344,6 @@ form {
 }
 
 .dir-left {
-    background-image: url('character.svg');
     transform: rotate(-90deg);
     animation-name: move-left;
     animation-duration: .5s;
@@ -345,7 +351,6 @@ form {
 }
 
 .dir-up {
-    background-image: url('character.svg');
     transform: rotate(0);
     animation-name: move-up;
     animation-duration: .5s;
@@ -353,7 +358,6 @@ form {
 }
 
 .dir-down {
-    background-image: url('character.svg');
     transform: rotate(180deg);
     animation-name: move-down;
     animation-duration: .5s;

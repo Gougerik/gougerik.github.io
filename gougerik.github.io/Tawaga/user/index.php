@@ -6,7 +6,7 @@
     if(!empty($_SESSION['user'])) {
         $user = $_SESSION['user'];
     }
-    $rf = (!empty($_GET['rf'])) ? $_GET['rf'] : 'index';
+    $rf = (!empty($_GET['rf'])) ? $_GET['rf'] : 'index.php';
     $id = $_GET['id'];
     $query = mysqli_query($con, "SELECT * FROM users WHERE id = '$id'");
     $row = mysqli_fetch_array($query);
@@ -30,15 +30,16 @@
 
 <body>
     <header>
-        <a href="../<?php echo $rf; ?>.php">Back</a>
+        <a href="../<?php echo $rf; ?>">Back</a>
     </header>
     <div id="loader">
         <p>Loading</p>
         <div class="loader"></div>
     </div>
     <nav>
-<?php if(!empty($_SESSION['user'])) { ?>
+<?php if(!empty($_SESSION['user']) && $_SESSION['user'] == $username) { ?>
         <button onclick="window.location.assign('settings.php');">Settings</button>
+        <button onclick="window.location.assign('store.php');">Store</button>
         <button onclick="window.location.assign('../logout.php');">Logout</button>
 <?php } ?>
     </nav>
