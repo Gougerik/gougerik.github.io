@@ -14,8 +14,6 @@ $(document).ready(function() {
         $('.loader').remove();
     }, 500);
     Shuffle();
-    clearInterval(Interval);
-    Interval = setInterval(startTimer, 10);
     $('.card').click(function() {
         if(revealed == true || revealed == false) {
             if(!$(this).hasClass('first')) {
@@ -35,6 +33,8 @@ $(document).ready(function() {
 });
 
 Shuffle = () => {
+    clearInterval(Interval);
+    Interval = setInterval(startTimer, 10);
     $('.paired').removeClass('paired');
     $('.modal').css('display','none');
     var ul = document.querySelector('.grid');
