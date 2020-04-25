@@ -28,7 +28,7 @@ function GenWalls() {
     while(i <= wl-1) {
         var ob = walls[i];
         var object = ob.split('|');
-        $('#row'+object[0]+' > #block'+object[1]).addClass('wall');
+        $('#row'+object[1]+' > #block'+object[0]).addClass('wall');
         i += 1;
     }
 }

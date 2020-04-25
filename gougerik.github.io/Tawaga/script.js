@@ -4,8 +4,8 @@ var paused, level;
 paused = level = 1;
 var x, y, gemx, gemy, bombx, bomby, gems, record, credits, countdown, totcd;
 x = y = gemx = gemy = bombx = bomby = gems = record = credits = countdown = totcd = 0;
-var bombs, campaign;
-bombs = sound = false;
+var bombs, campaign, loadcode;
+bombs = sound = loadcode = false;
 var sound = true;
 
 var pw = '';
@@ -20,9 +20,15 @@ function Render(numrows, numcols) {
     for (var i = 1; i <= numcols; i += 1) {
         //console.log("Rendering row " + i);
         $("#canvas").append('<div class="row" id="row' + i + '"></div>');
+        $("#minimap").append('<div class="row" id="minirow' + i + '"></div>');
         for (var z = 1; z <= numrows; z += 1) {
             //console.log("Rendering block " + z);
             $("#row" + i).append('<div class="block" id="block' + z + '"></div>');
+            $("#minirow" + i).append('<div class="block" id="miniblock' + z + '"></div>');
+            var rn = Math.floor(Math.random() * Math.floor(8)) + 1;
+            if(rn == 1) {
+                $("#row" + i + " > #block" + z).addClass('grass');
+            }
         }
     }
     rows = numrows;
@@ -33,6 +39,7 @@ function Render(numrows, numcols) {
     }
     Gem();
     if (bombs) {
+        $('#ifbombs').css('display','unset');
         Bomb();
     }
 }
@@ -111,52 +118,58 @@ function BlowUp() {
     clearInterval(countdown);
 }
 $('#initBtn').click(function () {
-    var rsg;
-    clearInterval(countdown);
-    clearInterval(rsg);
-    paused = 1;
-    this.blur()
-    var numcols = $('input[name="columns"]').val();
-    var numrows = $('input[name="rows"]').val();
-    var timeleft = $('input[name="time"]').val();
-    if(campaign) {
-        numcols = cols;
-        numrows = rows;
-        timeleft = cdtl;
-    }
-    totcd = timeleft;
-    if (numrows <= 20 && numcols <= 20 && numrows >= 5 && numcols >= 5 && timeleft >= 1 && timeleft <= 60) {
-        var timer = 3,
-            minutes, seconds;
-        rsg = setInterval(function () {
-            seconds = parseInt(timer % 60, 10);
-            seconds = seconds < 10 ? seconds : seconds;
-            $('#canvas').html('<h1 class="middle init">' + seconds + '</h1>');
-            if(sound) {
-                var rollSound = new Audio(pw+"sounds/countdown.wav");
-                rollSound.play();
-            }
-            if (--timer < 0) {
+    if(paused == 1) {
+        var rsg;
+        clearInterval(countdown);
+        clearInterval(rsg);
+        paused = 1;
+        this.blur()
+        var numcols = $('input[name="columns"]').val();
+        var numrows = $('input[name="rows"]').val();
+        var timeleft = $('input[name="time"]').val();
+        if(campaign) {
+            numcols = cols;
+            numrows = rows;
+            timeleft = cdtl;
+        }
+        totcd = timeleft;
+        if (numrows <= 20 && numcols <= 20 && numrows >= 5 && numcols >= 5 && timeleft >= 1 && timeleft <= 60) {
+            var timer = 3,
+                minutes, seconds;
+            rsg = setInterval(function () {
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? seconds : seconds;
+                $('#canvas').html('<h1 class="middle init">' + seconds + '</h1>');
                 if(sound) {
-                    var rollSound = new Audio(pw+"sounds/start.wav");
+                    var rollSound = new Audio(pw+"sounds/countdown.wav");
                     rollSound.play();
                 }
-                paused = 0;
-                clearInterval(rsg);
-                Start(timeleft);
-                Render(numcols, numrows);
-            }
-        }, 1000);
-    } else {
-        $('#canvas').html('<p class="middle" id="initText"></p>');
-        $('#initText').append('<span class="init text-center">Wrong parameters!</span><br>');
-        $('#initText').append('Min. Size: <span class="init">5 x 5</span><br>');
-        $('#initText').append('Max. Size: <span class="init">20 x 20</span><br>');
-        $('#initText').append('Max. Countdown: <span class="init">60 min.</span>');
+                if (--timer < 0) {
+                    if(sound) {
+                        var rollSound = new Audio(pw+"sounds/start.wav");
+                        rollSound.play();
+                    }
+                    paused = 0;
+                    clearInterval(rsg);
+                    Start(timeleft);
+                    Render(numcols, numrows);
+                }
+            }, 1000);
+        } else {
+            $('#canvas').html('<p class="middle" id="initText"></p>');
+            $('#initText').append('<span class="init text-center">Wrong parameters!</span><br>');
+            $('#initText').append('Min. Size: <span class="init">5 x 5</span><br>');
+            $('#initText').append('Max. Size: <span class="init">20 x 20</span><br>');
+            $('#initText').append('Max. Countdown: <span class="init">60 min.</span>');
+        }
     }
 });
 
 function Start(cd) {
+    gems = 0;
+    $('#gems').html('0');
+    $('#ifbombs').css('display','none');
+    $('#minimap').html('');
     clearInterval(countdown);
     var duration = 60 * cd;
     var timer = duration,
@@ -178,13 +191,15 @@ function Start(cd) {
                     $('#canvas').html('<p class="middle" id="initText"></p>');
                     $('#initText').append('<span class="text-center">Level completed!</span>');
                     $('#initText').append('Collected Gems: <span class="init">' + gems + '</span><br>');
-                    $('#initText').append('Collected Credits: <span class="init">'+prize+'</span>');
-                    credits = credits + prize;
-                    $.ajax({
-                        type: 'post',
-                        url: '../init/levelup.php',
-                        data: { passed:level }
-                    });
+                    if(loadcode == false) {
+                        $('#initText').append('Collected Credits: <span class="init">'+prize+'</span>');
+                        credits = credits + prize;
+                        $.ajax({
+                            type: 'post',
+                            url: '../init/levelup.php',
+                            data: { passed:level }
+                        });
+                    }
                 } else {
                     if(sound) {
                         var rollSound = new Audio(pw+"sounds/lose.wav");
@@ -212,7 +227,7 @@ function Start(cd) {
                 $('#initText').append('<span class="init text-center">' + balance + '</span>');
                 credits = credits + balance;
                 if (balance > record) {
-                    record = credits;
+                    record = balance;
                     $('#initText').append('<br><span class="text-center init">New Record!</span>');
                     $('#record').html(record);
                     $.ajax({
@@ -229,8 +244,8 @@ function Start(cd) {
             $('#gems').html('0');
             $('#posx').html('0');
             $('#posy').html('0');
-            $('#bombx').html('0');
-            $('#bomby').html('0');
+            $('#ifbombs').css('display','none');
+            $('#minimap').html('');
             $('#level').html(level);
             $('#initBtn').html('Replay');
             gems = 0;
@@ -287,13 +302,13 @@ function Bomb() {
         if (yr !== y && xr !== x && yr !== gemy && xr !== gemx) {
             $('.bomb').html("");
             $('.bomb').removeClass('bomb');
+            $('.bombpoint').removeClass('bombpoint');
             $("#row" + yr + " > #block" + xr).addClass('bomb');
             $('.bomb').html('<div class="mine"></div>');
             //console.log('Rendering Gem at x: ' + xr + ', y: ' + yr);
             bombx = xr;
             bomby = yr;
-            $('#bombx').html(bombx);
-            $('#bomby').html(bomby);
+            $('#minirow'+yr+' > #miniblock'+xr).addClass('bombpoint');
         } else {
             Bomb();
         }
@@ -367,4 +382,10 @@ Switch = (id,tar) => {
         window[tar] = true;
         $('#toggle-'+id).attr('class','jockey toggle-on');
     }
+}
+
+ctc = (obj) => {
+    $(obj).select();
+    document.execCommand('copy');
+    $('#ctcModal').css('display','unset');
 }

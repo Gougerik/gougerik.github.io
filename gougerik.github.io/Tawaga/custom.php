@@ -10,8 +10,8 @@
         $credits = number_format((float)(intval($row['credits'])/1000), 2, '.', '');
         $credits = $credits.'k';
         $sounds = $row['sounds_fx'];
-        $character = $row['character'];
     }
+    $character = (!empty($_SESSION['user'])) ? $row['character'] : '1';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,11 +60,15 @@
             <input type="number" name="time" placeholder="Countdown (Minutes)" required />
             <button id="initBtn">Start</button>
             <p>Player Pos.: <span class="init">x=<span id="posx">1</span> y=<span id="posy">1</span></span></p>
-            <p>Bomb. Pos.: <span class="init">x=<span id="bombx">0</span> y=<span id="bomby">0</span></span></p>
+            <!-- <p>Bomb. Pos.: <span class="init">x=<span id="bombx">0</span> y=<span id="bomby">0</span></span></p> -->
             <p>Time Left: <span class="init" id="timeleft">00:00</span></p>
             <p>Gems: <span class="init" id="gems">0</span></p>
             <p>Level: <span class="init" id="level">1</span></p>
             <p>Best Score: <span class="init" id="record"><?php echo (!empty($_SESSION['user'])) ? $record : '0'; ?></span></p>
+            <div id="ifbombs" style="display: none;">
+                <p>Bomb minimap:</p>
+                <div id="minimap"></div>
+            </div>
         </legend>
         <legend style="align-items: center;align-self: flex-end;">
             <div><button class="arrow" id="up">&uarr;</button><br></div>
@@ -74,6 +78,8 @@
                 <button class="arrow" id="right">&rarr;</button>
             </div>
             <div style="width: 1OO% !important;"><button class="arrow" id="enter" style="width: 100%;" onclick="Pause();">Pause &#x23CE;</button></div>
+            <br><br>
+            <button class="beta" style="position: relative;" onclick="window.location.assign('loadcode.php');">LoadCODE</button>
         </legend>
         <div id="canvas">
             <p class="middle text-center">Set default parameters.</p>

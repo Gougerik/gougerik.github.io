@@ -62,10 +62,13 @@
             <button id="initBtn">Start</button>
             <p>Player 1 Pos.: <span class="init">x=<span id="posx1">1</span> y=<span id="posy1">1</span></span></p>
             <p>Player 2 Pos.: <span class="init">x=<span id="posx2">1</span> y=<span id="posy2">1</span></span></p>
-            <p>Bomb. Pos.: <span class="init">x=<span id="bombx">0</span> y=<span id="bomby">0</span></span></p>
             <p>Time Left: <span class="init" id="timeleft">00:00</span></p>
             <p>Gems 1: <span class="init" id="gems1">0</span></p>
             <p>Gems 2: <span class="init" id="gems2">0</span></p>
+            <div id="ifbombs" style="display: none;">
+                <p>Bomb minimap:</p>
+                <div id="minimap"></div>
+            </div>
         </legend>
         <legend style="align-items: center;align-self: flex-end;">
             <div><button class="arrow" id="up">&uarr;</button><br></div>
@@ -87,7 +90,7 @@
         </div>
     </section>
     <footer>
-        <p><b>Tips: </b>Arrows &gt; Moving Player 1,&nbsp;&nbsp;&nbsp;WASD &gt; Moving Player 2,&nbsp;&nbsp;&nbsp;Enter &gt; Pause/Resume</p>
+        <p><b>Tips: </b>Arrows &gt; Moving Player 1,&nbsp;&nbsp;&nbsp;WASD &gt; Moving Player 2</p>
     </footer>
     <!-- SCRIPTS IMPORT -->
     <script src="jquery.min.js"></script>

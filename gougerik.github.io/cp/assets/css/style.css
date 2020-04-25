@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+* {
+  box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #c7c7c7; }
+
+#body {
+  opacity: 0;
+  transition: all .5s ease; }
+
+header, footer {
+  background-color: #00295D;
+  padding: 10px;
+  color: #ffffff;
+  text-align: center;
+  width: 100%; }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 10px; }
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0; }
+
+.modal-body {
+  background-color: #00295D;
+  color: #ffffff;
+  padding: 3rem 5rem; }
+
+.btn {
+  padding: 10px 30px;
+  background-color: #c7c7c7;
+  color: #333333;
+  display: block;
+  margin: auto; }
+  .btn:hover, .btn:focus, .btn:active {
+    background-color: #ffffff; }
+
+a:link, a:visited {
+  color: #c7c7c7; }
+
+#cards {
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background-color: #ffffff; }
+
+.grid {
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.card {
+  flex: 0 0 25%;
+  border: 1px solid #00295D;
+  border-collapse: collapse; }
+
+.card {
+  position: relative; }
+  .card > div > img {
+    max-width: 100%;
+    max-height: 100%; }
+
+.front {
+  transform: rotateY(90deg);
+  animation: reveal .2s ease .2s forwards; }
+
+.back {
+  position: absolute;
+  top: 0;
+  animation: hide .2s ease 0s forwards;
+  transform: rotateY(270deg); }
+
+.paired {
+  border: 1px solid lime; }
+  .paired > .back {
+    animation: reveal .2s ease .2s forwards; }
+  .paired > .front {
+    animation: hide .2s ease 0s forwards; }
+
+.revealed > .back {
+  animation: reveal .2s ease .2s forwards; }
+
+.revealed > .front {
+  animation: hide .2s ease 0s forwards; }
+
+@keyframes reveal {
+  from {
+    transform: rotateY(270deg); }
+  to {
+    transform: rotateY(360deg); } }
+
+@keyframes hide {
+  from {
+    transform: rotateY(0deg); }
+  to {
+    transform: rotateY(90deg); } }

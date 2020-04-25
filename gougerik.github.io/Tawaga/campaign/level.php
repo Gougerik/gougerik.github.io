@@ -55,12 +55,15 @@
     <legend autocomplete="off" style="align-items: flex-start;align-self: flex-start;">
             <button id="initBtn">Start</button>
             <p>Player Pos.: <span class="init">x=<span id="posx">1</span> y=<span id="posy">1</span></span></p>
-            <p>Bomb. Pos.: <span class="init">x=<span id="bombx">0</span> y=<span id="bomby">0</span></span></p>
             <p>Time Left: <span class="init" id="timeleft">00:00</span></p>
             <p>Gems: <span class="init" id="gems">0</span></p>
             <p>Goal: <span class="init" id="goal">0</span> <span class="init">Gems</span></p>
             <p>Level: <span class="init" id="level"><?php echo $row['level']; ?></span></p>
             <p>Best Score: <span class="init" id="record"><?php echo $record; ?></span></p>
+            <div id="ifbombs" style="display: none;">
+                <p>Bomb minimap:</p>
+                <div id="minimap"></div>
+            </div>
         </legend>
         <legend style="align-items: center;align-self: flex-end;">
             <div><button class="arrow" id="up">&uarr;</button><br></div>

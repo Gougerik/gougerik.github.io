@@ -18,13 +18,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tawaga</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.webcoder.sk/projects/js/projects.js" data-sitekey="HwQAFY9Hn2lNbdGWk80JK1hV2sk2oz"></script>
 </head>
 
 <body>
     <header>
     <?php if(!empty($_SESSION['user'])) { ?><a href="<?php echo 'user?id='.$id; ?>">Profile (<?php echo $user; ?>)</a><?php } else { ?><a href="signin.php">Sign In</a><?php } ?>
         <a href="leaderboard.php">Leaderboard</a>
+        <a href="levelbuilder.php" class="beta">Level Builder</a>
     </header>
     <nav>
     <?php if(!empty($_SESSION['user'])) { ?><p>Balance: <span class="init" id="balance"><?php echo (!empty($_SESSION['user'])) ? $credits : '0'; ?></span> <span class="init">Credits</span></p><?php } ?>
@@ -56,14 +56,6 @@
         $(document).ready(function() {
             $('#enter').parent().css('width', '100%');
         });
-        <?php
-            if(!empty($_SESSION['user'])) {
-                echo 'credits = '.$ccredits.';record='.$record.';';
-            }
-            if($sounds == false) {
-                echo 'sound = false;';
-            }
-        ?>
     </script>
 </body>
 

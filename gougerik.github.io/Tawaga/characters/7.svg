@@ -3,10 +3,12 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 283 283" style="enable-background:new 0 0 283 283;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#84847F;stroke:#000000;stroke-width:13;stroke-miterlimit:10;}
-	.st1{stroke:#F7F700;stroke-width:13;stroke-miterlimit:10;}
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-width:13;stroke-miterlimit:10;}
+	.st1{stroke:#000000;stroke-width:13;stroke-miterlimit:10;}
+	.st2{fill:#E0BE68;stroke:#000000;stroke-width:13;stroke-miterlimit:10;}
 </style>
-<title>dirnone</title>
+<title>character</title>
 <rect x="6.5" y="6.5" class="st0" width="270" height="270"/>
-<polygon class="st1" points="226,94.5 226,166.5 168,166.5 168,276 115,276 115,166.5 57,166.5 57,94.5 "/>
+<rect x="55.5" y="7.8" class="st1" width="172" height="97.2"/>
+<rect x="102.5" y="152" transform="matrix(0.7071 0.7071 -0.7071 0.7071 176.5018 -44.113)" class="st2" width="78" height="78"/>
 </svg>
