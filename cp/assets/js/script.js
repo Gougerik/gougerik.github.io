@@ -42,7 +42,7 @@ Check = () => {
     $('.first').removeClass('first');
     $('.second').removeClass('second');
     revealed = false;
-    if($('.paired').length == 12) {
+    if($('.paired').length == 24) {
         $('.modal').css('display','flex');
     }
 }

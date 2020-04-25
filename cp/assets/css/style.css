@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box; }
 
 html, body {
   height: 100%;
@@ -53,7 +55,7 @@ a:link, a:visited {
   color: #c7c7c7; }
 
 #cards {
-  width: 50%;
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -68,7 +70,7 @@ a:link, a:visited {
   flex-wrap: wrap; }
 
 .card {
-  flex: 0 0 25%;
+  flex: 0 0 12.5%;
   border: 1px solid #00295D;
   border-collapse: collapse; }
 
@@ -77,6 +79,10 @@ a:link, a:visited {
   .card > div > img {
     max-width: 100%;
     max-height: 100%; }
+
+.logo {
+  vertical-align: sub;
+}
 
 .front {
   transform: rotateY(90deg);
@@ -89,11 +95,15 @@ a:link, a:visited {
   transform: rotateY(270deg); }
 
 .paired {
-  border: 1px solid lime; }
+  background-color: #c7c7c7; border: 0px; }
   .paired > .back {
-    animation: reveal .2s ease .2s forwards; }
+    animation: reveal .2s ease .2s forwards;
+    transition: all .5s ease;
+    opacity: 0; }
   .paired > .front {
-    animation: hide .2s ease 0s forwards; }
+    animation: hide .2s ease 0s forwards; 
+    transition: all .5s ease;
+    opacity: 0; }
 
 .revealed > .back {
   animation: reveal .2s ease .2s forwards; }
