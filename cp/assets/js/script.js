@@ -1,8 +1,8 @@
 var revealed = false;
 
 $(document).ready(function() {
-    setTimeout($('.loader').css('display','none'), 1000);
-    setTimeout($('#body').css('opacity','1'), 1000);
+    $('.loader').css('display','none');
+    $('#body').css('opacity','1');
     Shuffle();
     $('.card').click(function() {
         if(revealed == true || revealed == false) {
