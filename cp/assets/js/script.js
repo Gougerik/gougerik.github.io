@@ -73,7 +73,7 @@ startTimer = () => {
       seconds++;
       appendSeconds.innerHTML = "0" + seconds;
       tens = 0;
-      appendTens.innerHTML = "0" + 0;
+      //appendTens.innerHTML = "0" + 0;
     }
     
     if (seconds > 9){
