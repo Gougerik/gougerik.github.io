@@ -1,4 +1,11 @@
 var revealed = false;
+var seconds = 00;
+var tens = 00;
+var minutes = 00;
+var appendSeconds = document.getElementById("seconds");
+var appendMinutes = document.getElementById("minutes");
+var Interval;
+
 
 $(document).ready(function() {
     $('.loader').css('opacity',0);
@@ -7,6 +14,8 @@ $(document).ready(function() {
         $('.loader').remove();
     }, 500);
     Shuffle();
+    clearInterval(Interval);
+    Interval = setInterval(startTimer, 10);
     $('.card').click(function() {
         if(revealed == true || revealed == false) {
             if(!$(this).hasClass('first')) {
@@ -43,6 +52,44 @@ Check = () => {
     $('.second').removeClass('second');
     revealed = false;
     if($('.paired').length == 24) {
+        clearInterval(Interval);
         $('.modal').css('display','flex');
     }
 }
+
+startTimer = () => {
+    tens++; 
+    
+    if(tens < 9){
+      //appendTens.innerHTML = "0" + tens;
+    }
+    
+    if (tens > 9){
+      //appendTens.innerHTML = tens;
+      
+    } 
+    
+    if (tens > 99) {
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+    
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+    }
+
+    if (seconds > 59) {
+        minutes++;
+        appendMinutes.innerHTML = "0" + minutes;
+        seconds = 0;
+        appendSeconds.innerHTML = "0" + 0;
+    }
+
+    if(minutes > 9) {
+        appendMinutes.innerHTML = minutes;
+    }
+  
+  }
+

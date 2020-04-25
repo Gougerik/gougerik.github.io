@@ -77,8 +77,8 @@ a:link, a:visited {
 .card {
   position: relative; }
   .card > div > img {
-    max-width: 100%;
-    max-height: 100%; }
+    max-width: 99%;
+    max-height: 99%; }
 
 .logo {
   vertical-align: sub;
@@ -86,13 +86,20 @@ a:link, a:visited {
 
 .front {
   transform: rotateY(90deg);
-  animation: reveal .2s ease .2s forwards; }
+  animation: reveal .2s ease .2s forwards;
+  filter: grayscale(100%);
+  display: flex; 
+  justify-content: center;
+  align-self: center;}
 
 .back {
   position: absolute;
   top: 0;
   animation: hide .2s ease 0s forwards;
-  transform: rotateY(270deg); }
+  transform: rotateY(270deg);
+  display: flex; 
+  justify-content: center;
+  align-self: center;}
 
 .paired {
   background-color: #c7c7c7; border: 0px; }
