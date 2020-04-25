@@ -1,8 +1,11 @@
 var revealed = false;
 
 $(document).ready(function() {
-    $('.loader').css('display','none');
+    $('.loader').css('opacity',0);
     $('#body').css('opacity','1');
+    setTimeout(function () {
+        $('.loader').remove();
+    }, 500);
     Shuffle();
     $('.card').click(function() {
         if(revealed == true || revealed == false) {
