@@ -1,9 +1,7 @@
 var revealed = false;
+var started = false;
 var seconds = 00;
-var tens = 00;
 var minutes = 00;
-var appendSeconds = document.getElementById("seconds");
-var appendMinutes = document.getElementById("minutes");
 var Interval;
 
 
@@ -15,8 +13,11 @@ $(document).ready(function() {
     }, 500);
     Shuffle();
     $('.card').click(function() {
+        if(started == false) {
+            Start();
+        }
         if(revealed == true || revealed == false) {
-            if(!$(this).hasClass('first')) {
+            if(!$(this).hasClass('first') && !$(this).hasClass('paired')) {
                 if(revealed == false) {
                     $(this).addClass('revealed');
                     $(this).addClass('first');
@@ -24,7 +25,7 @@ $(document).ready(function() {
                 } else {
                     $(this).addClass('revealed');
                     $(this).addClass('second');
-                    revealed = 3;
+                    revealed = 2;
                     setTimeout(Check, 1000);
                 }
             }
@@ -33,8 +34,6 @@ $(document).ready(function() {
 });
 
 Shuffle = () => {
-    clearInterval(Interval);
-    Interval = setInterval(startTimer, 10);
     $('.paired').removeClass('paired');
     $('.modal').css('display','none');
     var ul = document.querySelector('.grid');
@@ -53,43 +52,39 @@ Check = () => {
     revealed = false;
     if($('.paired').length == 24) {
         clearInterval(Interval);
+        started = false;
         $('.modal').css('display','flex');
     }
 }
 
-startTimer = () => {
-    tens++; 
-    
-    if(tens < 9){
-      //appendTens.innerHTML = "0" + tens;
-    }
-    
-    if (tens > 9){
-      //appendTens.innerHTML = tens;
-      
-    } 
-    
-    if (tens > 99) {
-      seconds++;
-      appendSeconds.innerHTML = "0" + seconds;
-      tens = 0;
-      //appendTens.innerHTML = "0" + 0;
-    }
-    
-    if (seconds > 9){
-      appendSeconds.innerHTML = seconds;
-    }
+Start = () => {
+    started = true;
+    seconds = 00;
+    minutes = 00;
+    $('seconds').html('0'+0);
+    $('minutes').html('0'+0);
+    clearInterval(Interval);
+    Interval = setInterval(startTimer, 1000);
+}
 
+startTimer = () => {
+    seconds++; 
+    if(seconds < 9){
+        $('#seconds').html("0"+seconds);
+    }
+    if (seconds > 9){
+        $('#seconds').html(seconds);
+    }
     if (seconds > 59) {
         minutes++;
-        appendMinutes.innerHTML = "0" + minutes;
+        $('#minutes').html("0" + minutes);
         seconds = 0;
-        appendSeconds.innerHTML = "0" + 0;
+        $('#seconds').html("0"+0);
     }
-
     if(minutes > 9) {
-        appendMinutes.innerHTML = minutes;
+        $('#minutes').html(minutes);
     }
-  
-  }
+    console.log(seconds);
+    console.log(minutes);
+}
 

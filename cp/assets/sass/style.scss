@@ -17,6 +17,7 @@ html, body {
     padding: 0;
     font-family: 'Montserrat', sans-serif;
     background-color: $gray;
+    overflow-y: hidden;
 }
 
 #body {
@@ -55,6 +56,7 @@ footer {
 }
 
 .btn {
+    border: 0;
     padding: 10px 30px;
     background-color: $gray;
     color: #333333;
@@ -72,7 +74,7 @@ a {
 }
 
 #cards {
-    width: 50%;
+    width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -89,22 +91,25 @@ a {
 }
 
 .card {
-    flex: 0 0 25%;
-    border: 1px solid $blue;
-    border-collapse: collapse;
-}
-
-.card {
     position: relative;
+    flex: 0 0 12.5%;
+    border: 1px solid #00295D;
     & > div > img {
         max-width: 100%;
         max-height: 100%;
     }
 }
 
+.logo {
+    vertical-align: sub;
+  }
+
 .front {
     transform: rotateY(90deg);
     animation: reveal .2s ease .2s forwards;
+    display: flex; 
+    justify-content: center;
+    align-self: center;
 }
 
 .back {
@@ -112,15 +117,23 @@ a {
     top: 0;
     animation: hide .2s ease 0s forwards;
     transform: rotateY(270deg);
+    display: flex; 
+    justify-content: center;
+    align-self: center;
 }
 
 .paired {
-    border: 1px solid lime;
+    background-color: #c7c7c7; 
+    border: 0px;
     & > .back {
         animation: reveal .2s ease .2s forwards;
+        transition: all .5s ease;
+        opacity: 0;
     }
     & > .front {
         animation: hide .2s ease 0s forwards;
+        transition: all .5s ease;
+        opacity: 0;
     }
 }
 

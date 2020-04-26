@@ -1,15 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
 * {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box; }
+  box-sizing: border-box; }
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
-  background-color: #c7c7c7; }
+  background-color: #c7c7c7;
+  overflow-y: hidden; }
 
 #body {
   opacity: 0;
@@ -42,7 +41,7 @@ footer {
   padding: 3rem 5rem; }
 
 .btn {
-  border: 0px;
+  border: 0;
   padding: 10px 30px;
   background-color: #c7c7c7;
   color: #333333;
@@ -70,44 +69,41 @@ a:link, a:visited {
   flex-wrap: wrap; }
 
 .card {
+  position: relative;
   flex: 0 0 12.5%;
-  border: 1px solid #00295D;
-  border-collapse: collapse; }
-
-.card {
-  position: relative; }
+  border: 1px solid #00295D; }
   .card > div > img {
     max-width: 100%;
     max-height: 100%; }
 
 .logo {
-  vertical-align: sub;
-}
+  vertical-align: sub; }
 
 .front {
   transform: rotateY(90deg);
   animation: reveal .2s ease .2s forwards;
-  display: flex; 
+  display: flex;
   justify-content: center;
-  align-self: center;}
+  align-self: center; }
 
 .back {
   position: absolute;
   top: 0;
   animation: hide .2s ease 0s forwards;
   transform: rotateY(270deg);
-  display: flex; 
+  display: flex;
   justify-content: center;
-  align-self: center;}
+  align-self: center; }
 
 .paired {
-  background-color: #c7c7c7; border: 0px; }
+  background-color: #c7c7c7;
+  border: 0px; }
   .paired > .back {
     animation: reveal .2s ease .2s forwards;
     transition: all .5s ease;
     opacity: 0; }
   .paired > .front {
-    animation: hide .2s ease 0s forwards; 
+    animation: hide .2s ease 0s forwards;
     transition: all .5s ease;
     opacity: 0; }
 
