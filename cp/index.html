@@ -66,6 +66,18 @@
             </div>
         </section>
         <!-- SCRIPT -->
+        <script>
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+            var body = document.body;
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
+            {
+                body.innerHTML = "This application doesn't support Internet Explorer."
+                body.style.display = "flex";
+                body.style.justifyContent = "center";
+                body.style.alignItems = "center";
+            }
+        </script>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/script.js"></script>
     </body>

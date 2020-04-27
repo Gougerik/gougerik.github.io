@@ -4,7 +4,6 @@ var seconds = 00;
 var minutes = 00;
 var Interval;
 
-
 $(document).ready(function() {
     $('.loader').css('opacity',0);
     $('#body').css('opacity','1');
