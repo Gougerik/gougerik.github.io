@@ -72,10 +72,11 @@
             var body = document.body;
             if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
             {
-                body.innerHTML = "This application doesn't support Internet Explorer."
+                body.innerHTML = "<code>This application doesn't support Internet Explorer.</code><code>Please use supported browsers:</code>Edge, Chrome, Firefox, Opera";
                 body.style.display = "flex";
                 body.style.justifyContent = "center";
                 body.style.alignItems = "center";
+                body.style.flexDirection = "column";
             }
         </script>
         <script src="assets/js/jquery.min.js"></script>
