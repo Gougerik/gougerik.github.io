@@ -22,6 +22,18 @@ shuffle = array => {
     return array;
   }
 
+type = chance => {
+    if(chance === 1) {
+        return "epic";
+    } else if(chance > 1 && chance <= 10) {
+        return "rare";
+    } else if(chance > 10 && chance <= 30) {
+        return "uncommon";
+    } else {
+        return "common";
+    }
+}
+
 // Open
 
 $(document).ready(function() {
@@ -34,7 +46,7 @@ $(document).ready(function() {
     $('.items').css('width',`${items.length * 134 * 4}px`);
     shuffle(items);
     for(var i = 0; i < items.length; i++) {
-        $('.items').append(`<div class="item" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
+        $('.items').append(`<div class="item ${type(items[i].chance)}" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
     }
     for(var i = 0; i < main.length; i++) {
         const sort = main;
@@ -43,7 +55,7 @@ $(document).ready(function() {
         if(value === sort.length) {
             value -= 1;
         }
-        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${value + '<b>:</b>' + main.length}</p></div>`);
+        $('.menu').append(`<div class="menuitem ${type(sort[i].chance)}" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${value + '<b>:</b>' + main.length}</p></div>`);
     }
 
 });
@@ -62,7 +74,7 @@ next = () => {
 
 finish = () => {
     const div = $('.items').html();
-    const final = Math.floor(Math.random() * (3000 - 2000)) + 2000;
+    const final = Math.floor(Math.random() * (4000 - 3000)) + 3000;
     $('.items').append(div);
     $('.items').append(div);
     $('.items').css('transition',`all 4s ease-out 0s`);
@@ -77,18 +89,20 @@ finish = () => {
         const id = $('.item').eq(Math.round(final/134+2)).attr("id");
         const reward = items.filter(item => item.id == Number(id));
         $('#reward').css('background-color',reward[0].color);
+        $('#reward').attr('class',type(reward[0].chance))
         $('#text').html(`Congratulations.<br>You won <b style="text-transform: uppercase">${reward[0].color}</b> color!`);
+        $('#type').html(`This item is <b style="text-transform: uppercase">${type(reward[0].chance)}</b>`);
         win.play();
         $('.modal').css('display','flex');
         $('.modal').css('opacity',1);
-    }, 4000);
+    }, 4200);
 }
 
 opener = () => {
     shuffle(items);
     $('.items').html('');
     for(var i = 0; i < items.length; i++) {
-        $('.items').append(`<div class="item" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
+        $('.items').append(`<div class="item ${type(items[i].chance)}" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
     }
     roll.play();
     $('#init-btn').attr('disabled','true');

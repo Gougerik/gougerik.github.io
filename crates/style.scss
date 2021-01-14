@@ -44,7 +44,7 @@ h2 {
     margin: 0;
 }
 
-#text {
+#text, #type {
     color: #ffffff;
     font-weight: 400;
     font-size: 20px;
@@ -83,12 +83,30 @@ h2 {
     }
 }
 
+.menuitem, #reward {
+    &.epic {
+        border: 3px solid #FFDC73;
+        box-shadow: 0px 0px 30px rgba(255,220,115,0.5);
+    }
+    
+    &.rare {
+        border: 3px solid #0096D1;
+    }
+    
+    &.uncommon {
+        border: 3px solid #C724B1;
+    }
+    
+    &.common {
+        border: 3px solid gray;
+    }
+}
+
 // Container
 
 #reward {
     width: 300px;
     height: 300px;
-    box-shadow: 0px 0px 30px rgba(255,220,115,0.5);
     border-radius: 4px;
 }
 

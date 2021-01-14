@@ -21,7 +21,7 @@ const main = [
     },
     {
         "id":5,
-        "color": "magenta",
+        "color": "maroon",
         "chance": 20
     },
     {
