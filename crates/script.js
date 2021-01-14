@@ -36,9 +36,13 @@ $(document).ready(function() {
     shuffle(items);
     for(var i = 0; i < items.length; i++) {
         $('.items').append(`<div class="item" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
-        const sort = items.filter(item => item.id == Number(i)+1);
-        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[0].color}"><span>${sort[0].color}</span><p>${sort[0].chance}%</p></div>`);
     }
+    for(var i = 0; i < main.length; i++) {
+        const sort = main;
+        sort.sort((a, b) => b.chance - a.chance);
+        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${sort[i].chance}%</p></div>`);
+    }
+
 });
 
 next = () => {
