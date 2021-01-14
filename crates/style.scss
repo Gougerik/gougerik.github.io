@@ -44,11 +44,42 @@ h2 {
     margin: 0;
 }
 
+#body {
+    visibility: hidden;
+}
+
 #text, #type {
     color: #ffffff;
     font-weight: 400;
     font-size: 20px;
     text-align: center;
+}
+
+// Loader
+
+.loader-wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    & > .loader {
+        display: block;
+        width: 70px;
+        height: 70px;
+        border-right: 5px solid $secondary;
+        border-left: 5px solid $secondary;
+        border-top: 5px solid $surface;
+        border-bottom: 5px solid $surface;
+        border-radius: 100vh;
+        animation-name: loading;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+    }
 }
 
 // Menu
@@ -128,6 +159,7 @@ h2 {
     padding: 2rem 5rem;
     border-radius: 4px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    position: relative;
 }
 
 // Opener
@@ -165,6 +197,7 @@ h2 {
     height: 100%;
     transform: translate3d(-72px, 0px, 0px);
     border-radius: 4px;
+    float: center;
 }
 
 .item {
@@ -233,4 +266,13 @@ button:disabled,button[disabled] {
         opacity: 0;
         transform: scale(var(--scale)); 
     } 
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

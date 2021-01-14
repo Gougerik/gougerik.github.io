@@ -57,7 +57,8 @@ $(document).ready(function() {
         }
         $('.menu').append(`<div class="menuitem ${type(sort[i].chance)}" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${value + '<b>:</b>' + main.length}</p></div>`);
     }
-
+    $('section#body').css('visibility','visible');
+    $('.loader-wrapper').css('display','none');
 });
 
 next = () => {
@@ -86,7 +87,7 @@ finish = () => {
     }
     setTimeout(() => {
         $('.items').css('transition','none');
-        const id = $('.item').eq(Math.round(final/134+2)).attr("id");
+        const id = $('.item').eq(Math.round((final + 262)/134)).attr("id");
         const reward = items.filter(item => item.id == Number(id));
         $('#reward').css('background-color',reward[0].color);
         $('#reward').attr('class',type(reward[0].chance))
