@@ -27,7 +27,6 @@ shuffle = array => {
 $(document).ready(function() {
     for(var i = 0; i < main.length; i++) {
         const value = Math.ceil(main[i].chance*(main.length*0.01));
-        console.log(value);
         for(var j = 0; j < value; j++) {
             items.push(main[i]);
         }
@@ -40,7 +39,11 @@ $(document).ready(function() {
     for(var i = 0; i < main.length; i++) {
         const sort = main;
         sort.sort((a, b) => b.chance - a.chance);
-        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${sort[i].chance}%</p></div>`);
+        var value = Math.ceil(sort[i].chance*(sort.length*0.01));
+        if(value === sort.length) {
+            value -= 1;
+        }
+        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${value + '<b>:</b>' + main.length}</p></div>`);
     }
 
 });
