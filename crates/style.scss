@@ -28,8 +28,9 @@ html, body {
     height: 100%;
     font-family: 'Roboto Condensed', sans-serif;
     display: flex;
-    justify-content: center;
+    padding: 1rem;
     align-items: center;
+    justify-content: center;
     background-color: $bg;
 }
 
