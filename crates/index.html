@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opener</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="opener">
+            <div class="line"></div>
+            <div class="items"></div>
+        </div>
+        <br><br>
+        <button type="button" id="init-btn" class="btn-raised" onClick="opener();" data-animation="ripple">Open</button>
+        <br><hr><br>
+        <h2>This crate contains:</h2><br>
+        <div class="menu"></div>
+    </div>
+    <div class="modal">
+        <div class="container">
+            <span id="text">Congratulations you won <b>white</b> color!</span><br><br>
+            <div id="reward"></div><br><br>
+            <button type="button" class="btn-raised" onClick="modalclose();" data-animation="ripple">OK</button>
+        </div>
+    </div>
+    <!-- SCRIPTS IMPORT -->
+    <script src="./jquery.min.js"></script>
+    <script src="./items.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

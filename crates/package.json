@@ -1,0 +1,12 @@
+{
+  "name": "opener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "node-sass ./style.scss ./style.css -w",
+    "compile:sass": "node-sass ./style.scss ./style.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
