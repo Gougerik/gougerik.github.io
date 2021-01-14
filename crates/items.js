@@ -1,42 +1,37 @@
-const items = [
+const main = [
     {
         "id":1,
-        "color": "green"
+        "color": "green",
+        "chance": 10
     },
     {
         "id":2,
-        "color": "purple"
+        "color": "purple",
+        "chance": 20
     },
     {
         "id":3,
-        "color": "orange"
+        "color": "orange",
+        "chance": 30
     },
     {
         "id":4,
-        "color": "blue"
+        "color": "blue",
+        "chance": 10
     },
     {
         "id":5,
-        "color": "pink",
+        "color": "magenta",
+        "chance": 20
     },
     {
         "id":6,
         "color": "cyan",
+        "chance": 1
     },
     {
         "id":7,
-        "color": "magenta"
+        "color": "gray",
+        "chance": 90
     },
-    {
-        "id":8,
-        "color": "maroon"
-    },
-    {
-        "id":9,
-        "color": "gray"
-    },
-    {
-        "id":10,
-        "color": "yellow"
-    }
 ]

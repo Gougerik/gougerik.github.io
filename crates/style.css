@@ -23,7 +23,7 @@ html, body {
 hr {
   border-color: #999999; }
 
-h1, h2, h3, h4, p {
+h2 {
   color: #ffffff;
   font-weight: 400;
   letter-spacing: 4px;
@@ -55,6 +55,11 @@ h1, h2, h3, h4, p {
     color: #ffffff;
     font-weight: 700;
     text-align: center; }
+  .menuitem > p {
+    color: #ffffff;
+    display: block;
+    margin: 10px;
+    text-shadow: 1.5px 1.5px rgba(0, 0, 0, 0.5); }
 
 #reward {
   width: 300px;

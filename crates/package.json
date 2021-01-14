@@ -1,8 +1,8 @@
 {
-  "name": "opener",
+  "name": "crates",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "items.js",
   "scripts": {
     "watch:sass": "node-sass ./style.scss ./style.css -w",
     "compile:sass": "node-sass ./style.scss ./style.css"

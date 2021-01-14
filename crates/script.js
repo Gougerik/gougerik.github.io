@@ -1,6 +1,7 @@
 var sound = new Audio('./sound.mp3');
 var win = new Audio('./win.mp3');
 var roll = new Audio('./roll.mp3');
+var items = [];
 const time = 35;
 
 // Shuffle
@@ -24,12 +25,19 @@ shuffle = array => {
 // Open
 
 $(document).ready(function() {
+    for(var i = 0; i < main.length; i++) {
+        const value = Math.ceil(main[i].chance*(main.length*0.01));
+        console.log(value);
+        for(var j = 0; j < value; j++) {
+            items.push(main[i]);
+        }
+    }
     $('.items').css('width',`${items.length * 134 * 4}px`);
     shuffle(items);
     for(var i = 0; i < items.length; i++) {
         $('.items').append(`<div class="item" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
         const sort = items.filter(item => item.id == Number(i)+1);
-        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[0].color}"><span>${sort[0].color}</span></div>`);
+        $('.menu').append(`<div class="menuitem" style="background-color: ${sort[0].color}"><span>${sort[0].color}</span><p>${sort[0].chance}%</p></div>`);
     }
 });
 
@@ -58,6 +66,7 @@ finish = () => {
         }, i * 134 * (i/2));
     }
     setTimeout(() => {
+        $('.items').css('transition','none');
         const id = $('.item').eq(Math.round(final/134+2)).attr("id");
         const reward = items.filter(item => item.id == Number(id));
         $('#reward').css('background-color',reward[0].color);
