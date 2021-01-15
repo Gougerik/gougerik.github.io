@@ -2,6 +2,7 @@ var sound = new Audio('./sound.mp3');
 var win = new Audio('./win.mp3');
 var roll = new Audio('./roll.mp3');
 var items = [];
+var sounds = true;
 const time = 35;
 
 // Shuffle
@@ -20,7 +21,7 @@ shuffle = array => {
     }
   
     return array;
-  }
+}
 
 type = chance => {
     if(chance === 1) {
@@ -37,6 +38,7 @@ type = chance => {
 // Open
 
 $(document).ready(function() {
+    feather.replace();
     for(var i = 0; i < main.length; i++) {
         const value = Math.ceil(main[i].chance*(main.length*0.01));
         for(var j = 0; j < value; j++) {
@@ -82,7 +84,9 @@ finish = () => {
     $('.items').css('transform',`translate3d(-${final}px, 0, 0)`);
     for(var i = 0; i < 8; i++) {
         setTimeout(() => {
-            sound.play();
+            if(sounds === true) {
+                sound.play();
+            }
         }, i * 134 * (i/2));
     }
     setTimeout(() => {
@@ -105,22 +109,36 @@ opener = () => {
     for(var i = 0; i < items.length; i++) {
         $('.items').append(`<div class="item ${type(items[i].chance)}" id="${items[i].id}" style="background-color: ${items[i].color};"></div>`);
     }
-    roll.play();
+    if(sounds === true) {
+        roll.play();
+    }
     $('#init-btn').attr('disabled','true');
     var i = 0;
     for(var i = 0; i < time; i++) {
         setTimeout(() => {
             next();
-            sound.play();
+            if(sounds === true) {
+                sound.play();
+            }
         }, i*60);
     }
     setTimeout(() => {
         finish();
     }, time*60.5);
 }
+
+// Modal
+
+modalclose = () => {
+    $('.modal').css('opacity',0);
+    $('.modal').css('display','none');
+    $('.btn-raised').removeAttr('disabled');
+}
+
 // Ripple
 
 const buttons = document.querySelectorAll("[data-animation=\"ripple\"]");
+console.log(buttons);
 [...buttons].forEach(e => {
     e.onmousedown = function(t) {
         const   e = t.pageX - this.offsetLeft,
@@ -133,8 +151,12 @@ const buttons = document.querySelectorAll("[data-animation=\"ripple\"]");
     }
 });
 
-modalclose = () => {
-    $('.modal').css('opacity',0);
-    $('.modal').css('display','none');
-    $('.btn-raised').removeAttr('disabled');
-}
+$('#mute').click(function() {
+    if(sounds === true) {
+        sounds = false;
+        $('.volume').addClass('mute');
+    } else {
+        sounds = true;
+        $('.volume').removeClass('mute');
+    }
+});
