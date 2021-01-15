@@ -94,7 +94,9 @@ finish = () => {
         $('#reward').attr('class',type(reward[0].chance))
         $('#text').html(`Congratulations.<br>You won <b style="text-transform: uppercase">${reward[0].color}</b> color!`);
         $('#type').html(`This item is <b style="text-transform: uppercase">${type(reward[0].chance)}</b>`);
-        win.play();
+        if(sounds === true) {
+            win.play();
+        }
         $('.modal').css('display','flex');
         $('.modal').css('opacity',1);
     }, 4200);
