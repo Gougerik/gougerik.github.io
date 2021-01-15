@@ -53,11 +53,8 @@ $(document).ready(function() {
     for(var i = 0; i < main.length; i++) {
         const sort = main;
         sort.sort((a, b) => b.chance - a.chance);
-        var value = Math.ceil(sort[i].chance*(sort.length*0.01));
-        if(value === sort.length) {
-            value -= 1;
-        }
-        $('.menu').append(`<div class="menuitem ${type(sort[i].chance)}" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${value + '<b>:</b>' + main.length}</p></div>`);
+        const value = Math.ceil(sort[i].chance*(sort.length*0.01));
+        $('.menu').append(`<div class="menuitem ${type(sort[i].chance)}" style="background-color: ${sort[i].color}"><span>${sort[i].color}</span><p>${value + '<b>:</b>' + items.length}</p></div>`);
     }
     $('section#body').css('visibility','visible');
     $('.loader-wrapper').css('display','none');
