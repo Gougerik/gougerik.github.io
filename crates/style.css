@@ -22,7 +22,9 @@ html, body {
   background-color: #202124; }
 
 hr {
-  border-color: #999999; }
+  padding: 0;
+  border: 1px solid #606368;
+  border-radius: 0; }
 
 h2 {
   color: #ffffff;
