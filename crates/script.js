@@ -72,6 +72,8 @@ change = () => {
     items = [];
     $('.items').html('');
     $('.menu').html('');
+    $('.items').css('transition','none');
+    $('.items').css('transform','translate3d(-206px, 0, 0)');
     init();
 }
 
