@@ -39,8 +39,7 @@ type = chance => {
 
 // Open
 
-$(document).ready(function() {
-    feather.replace();
+init = () => {
     for(var i = 0; i < main.length; i++) {
         const value = Math.ceil(main[i].chance*(main.length*0.01));
         for(var j = 0; j < value; j++) {
@@ -58,9 +57,23 @@ $(document).ready(function() {
         const value = Math.ceil(sort[i].chance*(sort.length*0.01));
         $('.menu').append(`<div class="menuitem ${type(sort[i].chance)}" style="background-image: url('${path+sort[i].image}');"><span>${sort[i].name}</span><p>${value + '<b>:</b>' + items.length}</p></div>`);
     }
+}
+
+$(document).ready(function() {
+    feather.replace();
+    $('#json').html(JSON.stringify(main), null, 4);
+    init();
     $('section#body').css('visibility','visible');
     $('.loader-wrapper').css('display','none');
 });
+
+change = () => {
+    main = JSON.parse($('#json').html());
+    items = [];
+    $('.items').html('');
+    $('.menu').html('');
+    init();
+}
 
 next = () => {
     $('.items').css('transition',`all 0.2s ease-out 0s`);

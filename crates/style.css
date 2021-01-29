@@ -18,8 +18,10 @@ html, body {
   display: flex;
   padding: 1rem;
   align-items: center;
-  justify-content: center;
-  background-color: #202124; }
+  padding: 0;
+  margin: 0;
+  background-color: #202124;
+  flex-direction: column; }
 
 hr {
   padding: 0;
@@ -129,7 +131,8 @@ h2 {
   background-color: #3C4042;
   padding: 2rem 5rem;
   border-radius: 4px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); }
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  margin: 2rem 0; }
 
 .opener {
   display: block;
@@ -226,6 +229,19 @@ h2 {
     background-position: 100% 50%;
     cursor: pointer; }
 
+.btn-general {
+  display: block;
+  margin: 0 auto;
+  background-color: #004d40;
+  color: #ffffff;
+  border: none;
+  padding: .5rem 1rem;
+  width: 100%;
+  transition: all .2s ease; }
+  .btn-general:hover, .btn-generalfocus {
+    cursor: pointer;
+    background-color: #00342b; }
+
 button:disabled, button[disabled] {
   background-position: 50% 50% !important;
   filter: grayscale(100%);
@@ -249,6 +265,20 @@ button:disabled, button[disabled] {
   transition: all .5s ease; }
   .volume.mute {
     color: #f44336; }
+
+.json-wrapper {
+  height: fit-content;
+  width: calc(700px + 10rem); }
+
+.json {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  background-color: #000000;
+  padding: 1rem;
+  color: #69f0ae;
+  margin: 0; }
 
 @keyframes rippleEffect {
   0% {

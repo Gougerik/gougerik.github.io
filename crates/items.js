@@ -1,4 +1,4 @@
-const main = [
+var main = [
     {
         "id":1,
         "name": "Item #1",
