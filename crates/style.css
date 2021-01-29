@@ -81,30 +81,35 @@ h2 {
     background-color: #000000;
     color: #ffffff;
     font-weight: 700;
-    text-align: center; }
+    text-align: center;
+    font-size: 15px; }
   .menuitem > p {
     color: #ffffff;
     display: block;
     margin: 10px;
-    text-shadow: 1.5px 1.5px rgba(0, 0, 0, 0.5); }
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
 
-.menuitem.epic, #reward.epic {
-  border: 3px solid #FFDC73;
-  box-shadow: 0px 0px 30px rgba(255, 220, 115, 0.5); }
-
-.menuitem.rare, #reward.rare {
-  border: 3px solid #0096D1; }
-
-.menuitem.uncommon, #reward.uncommon {
-  border: 3px solid #C724B1; }
-
-.menuitem.common, #reward.common {
-  border: 3px solid gray; }
+.menuitem, #reward {
+  background-size: cover; }
+  .menuitem.epic, #reward.epic {
+    border: 3px solid #FFDC73;
+    box-shadow: 0px 0px 30px rgba(255, 220, 115, 0.5); }
+  .menuitem.rare, #reward.rare {
+    border: 3px solid #0096D1; }
+  .menuitem.uncommon, #reward.uncommon {
+    border: 3px solid #C724B1; }
+  .menuitem.common, #reward.common {
+    border: 3px solid gray; }
 
 #reward {
   width: 300px;
   height: 300px;
   border-radius: 4px; }
+  #reward > img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%; }
 
 .modal {
   position: fixed;
@@ -159,6 +164,7 @@ h2 {
 
 .item {
   display: inline-block;
+  background-size: cover;
   background-color: #000000;
   height: 130px;
   width: 130px;
@@ -166,7 +172,18 @@ h2 {
   color: #999999;
   font-weight: 700;
   padding: 20px;
-  text-align: center; }
+  text-align: center;
+  border: 1px solid #ffffff;
+  background-size: cover; }
+  .item.epic {
+    border: 2px solid #FFDC73;
+    box-shadow: 0px 0px 30px rgba(255, 220, 115, 0.5); }
+  .item.rare {
+    border: 2px solid #0096D1; }
+  .item.uncommon {
+    border: 2px solid #C724B1; }
+  .item.common {
+    border: 2px solid gray; }
 
 .btn {
   margin: 0 auto 1rem auto;
