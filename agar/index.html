@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <div class="mp-button">
+            <input type="checkbox" id="minimap" onclick="showhide()" checked>
+        </div>
+        <div class="scoreboard">
+            <div class="player"></div>
+            <p class="caption">Scoreboard</p>
+            <ol class="score">
+            </ol>
+        </div>
+    </div>
+    <div class="modal">
+        <div align="center">
+            <span class="init">Press button to start</span><br><br>
+            <button onclick="render(); restart(); $('.modal').css('display','none'); myReq = requestAnimationFrame(animate);">Start</button>
+        </div>
+    </div>
+    <svg>
+        <defs>
+            <filter id='goo'>
+                <feGaussianBlur in='SourceGraphic'
+                stdDeviation='10' result='blur'/>
+                <feColorMatrix in="blur" mode="matrix" values = '0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -9' result='goo' />
+                <feComposite in='SourceGraphic' in2='goo' operator='atop' />
+            </filter>
+        </defs>
+    </svg>
+    <!-- SCRIPTS IMPORT -->
+    <script src="./jquery.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

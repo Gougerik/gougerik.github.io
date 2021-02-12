@@ -1,0 +1,86 @@
+/****************
+    VARIABLES
+****************/
+/************
+    STYLES
+************/
+*:focus {
+  border: 0 !important;
+  outline: 0 !important; }
+
+body, html {
+  display: flex;
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #eeeeee; }
+
+.scoreboard {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  color: #ffffff;
+  padding: 0 1rem; }
+  .scoreboard > ol {
+    padding: 0;
+    list-style: none; }
+  .scoreboard > .caption {
+    font-size: 20px;
+    padding: 0 5rem;
+    font-weight: bold; }
+
+.minimap {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  border: 1.5px solid #333333;
+  background-color: #eeeeee; }
+
+.mp-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100; }
+  .mp-button > input {
+    margin: 0;
+    width: 20px;
+    height: 20px; }
+
+.players {
+  position: absolute;
+  filter: url("#goo"); }
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+button {
+  margin: .5rem 1rem;
+  padding: .5rem 2rem;
+  border: 3px solid #333333;
+  color: #333333;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #eeeeee;
+  transition: all .3s ease-out; }
+  button:hover, button:focus {
+    cursor: pointer;
+    background-color: #333333;
+    color: #eeeeee; }
+
+.init {
+  font-size: 20px;
+  background-color: #333333;
+  color: #eeeeee;
+  padding: 10px; }
