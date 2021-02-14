@@ -97,28 +97,6 @@ function Bot(x,y,radius,color,speed,id) {
     this.update = (gx,gy) => {
         this.gx = gx;
         this.gy = gy;
-        for(var i = 0; i < bots.length; i++) {
-            if(bots[i] !== this && bots.includes(this) && bots.includes(bots[i])) {
-                // Fear of each other
-                if(this.x < bots[i].x+this.radius*8 && this.y < bots[i].y+this.radius*8 && this.x+this.radius*16 > bots[i].x+this.radius*8 && this.y+this.radius*16 > bots[i].y+this.radius*8 || !this.findclose) {
-                    this.findclose = false;
-                    if(bots[i].x > this.x && this.x - this.radius > 0 && this.x + this.radius < w*3) {
-                        this.x -= this.speed;
-                    } else if(bots[i].x < this.x && this.x - this.radius > 0 && this.x + this.radius < w*3) {
-                        this.x += this.speed;
-                    }
-                    if(bots[i].y > this.y && this.y - this.radius > 0 && this.y + this.radius < h*3) {
-                        this.y -= this.speed;
-                    } else if(bots[i].y < this.y && this.y - this.radius > 0 && this.y + this.radius < h*3) {
-                        this.y += this.speed;
-                    }
-                    setTimeout(() => {
-                        this.findclose = true;
-                    }, 3000);
-                }
-            }
-        }
-
         // Fear of player
         const playerscore = score.find(u => u.username === username).score;
         const current = score.find(b => b.id === this.id).score;
@@ -151,7 +129,7 @@ function Bot(x,y,radius,color,speed,id) {
             }
             setTimeout(() => {
                 this.findclose = true;
-            }, 3000);
+            }, 1000);
         } 
 
         // Pop
