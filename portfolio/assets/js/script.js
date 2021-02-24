@@ -32,11 +32,7 @@ $(function () {
   });
 
   $('[data-animation="ripple"]').each(function () {
-    if($(this).hasClass('dark')) {
-      $(this).prepend('<div class="c-ripple js-ripple dark"></div>');
-    } else {
-      $(this).prepend('<div class="c-ripple js-ripple"></div>');
-    }
+    $(this).prepend('<div class="c-ripple js-ripple"></div>');
   });
 
   var $ripple = $('.js-ripple');
