@@ -113,7 +113,7 @@ function Bot(x,y,radius,color,speed,id) {
                 } else if(h/2 < this.y+this.gy && this.y - this.radius > 0 && this.y + this.radius < h*3) {
                     this.y -= this.speed;
                 }
-            } else if(Math.round(current/100)*100 < Math.round(playerscore/100)*100) {
+            } else if(current < playerscore) {
                 if(w/2 > this.x+this.gx && this.x - this.radius > 0 && this.x + this.radius < w*3) {
                     this.x -= this.speed;
                 } else if(w/2 < this.x+this.gx && this.x - this.radius > 0 && this.x + this.radius < w*3) {
@@ -397,7 +397,7 @@ render = () => {
     gx = -w;
     gy = -h;
     radius = 50;
-    speed = 6;
+    speed = 8;
     scale = 150;
     ball_width = 10;
     mp = 1;
