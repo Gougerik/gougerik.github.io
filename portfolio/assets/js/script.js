@@ -31,35 +31,40 @@ $(function () {
     }
   });
 
-  $('[data-animation="ripple"]').each(function () {
-    $(this).prepend('<div class="c-ripple js-ripple"></div>');
+  $('[data-animation="ripple-outline"]').each(function () {
+    $(this).prepend('<div class="c-ripple js-ripple ripple-outline-text"></div>');
   });
 
-  var $ripple = $('.js-ripple');
-  var $todel;
+  var ripple = $('.c-ripple');
 
-  $ripple.on('mousedown', function(e) {
+  ripple.on('mousedown', function(e) {
     var $this = $(this);
-    var $offset = $this.parent().offset();
+    var offset = $this.parent().offset();
     $this.append('<span class="c-ripple__circle"></span>');
-    var $circle = $this.find('.c-ripple__circle');
+    var circle = $this.find('.c-ripple__circle');
 
-    var x = e.pageX - $offset.left;
-    var y = e.pageY - $offset.top;
+    var x = e.pageX - offset.left;
 
-    $circle.css({
-      top: y + 'px',
-      left: x + 'px'
+    circle.css({
+      left: x + 'px',
+      width: $this.width()/2 + 'px',
+      height: $this.width()/1.2 + 'px'
     });
 
     $this.addClass('is-active');
-    $todel = $circle;
   });
 
-  $ripple.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function(e) {
+  ripple.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function(e) {
     var $this = $(this);
     if($this.children().length > 10) {
       $this.children().first().remove();
     }
+  });
+
+  $('.smooth-scroll').click(function(){    
+    divId = $(this).attr('href');
+    $('html, body').animate({
+      scrollTop: $(divId).offset().top - 54
+    }, 100);
   });
 })
