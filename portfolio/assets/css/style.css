@@ -24,6 +24,9 @@ html, body {
 .bg-primary {
   background-color: #2962FF !important; }
 
+.bg-light {
+  background-color: #F5F5F5 !important; }
+
 .text-light, .link-light {
   color: #eeeeee !important;
   font-weight: 300; }
@@ -92,6 +95,8 @@ header {
   height: 0em;
   border-radius: 50%;
   transition: ease-in-out; }
+  .c-ripple.ripple-raised .c-ripple__circle {
+    background-color: rgba(128, 128, 128, 0.1); }
   .c-ripple.ripple-outline-text .c-ripple__circle {
     background-color: rgba(255, 255, 255, 0.2); }
   .c-ripple.is-active .c-ripple__circle {
@@ -99,6 +104,11 @@ header {
 
 [data-animation="ripple-outline"]:active {
   animation-name: active-outline-text;
+  animation-duration: 600ms;
+  animation-fill-mode: forwards; }
+
+[data-animation="ripple-raised"]:active {
+  animation-name: active-raised;
   animation-duration: 600ms;
   animation-fill-mode: forwards; }
 
@@ -145,6 +155,14 @@ header {
   .tech:hover {
     cursor: pointer; }
 
+.accordion-item {
+  box-shadow: 0 1px 1px 0 rgba(66, 66, 66, 0.08), 0 1px 3px 1px rgba(66, 66, 66, 0.16);
+  border-radius: 0; }
+
+.accordion-button {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.125) !important; }
+
 /****************
     KEYFRAMES
 ****************/
@@ -165,3 +183,11 @@ header {
     background-color: rgba(255, 255, 255, 0); }
   100% {
     background-color: rgba(255, 255, 255, 0.2); } }
+
+@keyframes active-raised {
+  25% {
+    background-color: transparent; }
+  26% {
+    background-color: rgba(128, 128, 128, 0); }
+  100% {
+    background-color: rgba(128, 128, 128, 0.1); } }

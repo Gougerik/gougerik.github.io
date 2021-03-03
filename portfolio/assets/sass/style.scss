@@ -38,6 +38,10 @@ html, body {
     background-color: $surface !important;
 }
 
+.bg-light {
+    background-color: #F5F5F5 !important;
+}
+
 .text-light, .link-light {
     color: $light !important;
     font-weight: 300;
@@ -124,6 +128,9 @@ header {
     height: 0em;
     border-radius: 50%;
     transition: ease-in-out;
+    .c-ripple.ripple-raised & {
+        background-color: rgba(lighten(#000000, 50), .1);
+    }
     .c-ripple.ripple-outline-text & {
       background-color: rgba(#ffffff, .2);
     }
@@ -134,6 +141,11 @@ header {
   
   [data-animation="ripple-outline"]:active {
     animation-name: active-outline-text;
+    animation-duration: $duration;
+    animation-fill-mode: forwards;
+  }
+  [data-animation="ripple-raised"]:active {
+    animation-name: active-raised;
     animation-duration: $duration;
     animation-fill-mode: forwards;
   }
@@ -194,6 +206,18 @@ header {
     }
 }
 
+// FAQ
+
+.accordion-item {
+    box-shadow: 0 1px 1px 0 rgba(66,66,66,0.08), 0 1px 3px 1px rgba(66,66,66,0.16);
+    border-radius: 0;
+}
+
+.accordion-button {
+    background-color: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.125) !important;
+}
+
 /****************
     KEYFRAMES
 ****************/
@@ -221,5 +245,17 @@ header {
     }
     100% {
         background-color: rgba(#ffffff, .2)
+    }
+}
+
+@keyframes active-raised {
+    25% {
+        background-color: transparent;
+    }
+    26% {
+        background-color: rgba(lighten(#000000, 50), 0);
+    }
+    100% {
+        background-color: rgba(lighten(#000000, 50), .1);
     }
 }

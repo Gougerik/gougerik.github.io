@@ -35,6 +35,10 @@ $(function () {
     $(this).prepend('<div class="c-ripple js-ripple ripple-outline-text"></div>');
   });
 
+  $('[data-animation="ripple-raised"]').each(function () {
+    $(this).prepend('<div class="c-ripple js-ripple ripple-raised"></div>');
+  });
+
   var ripple = $('.c-ripple');
 
   ripple.on('mousedown', function(e) {
@@ -56,7 +60,7 @@ $(function () {
 
   ripple.on('animationend webkitAnimationEnd oanimationend MSAnimationEnd', function(e) {
     var $this = $(this);
-    if($this.children().length > 10) {
+    if($this.children().length > 5) {
       $this.children().first().remove();
     }
   });
