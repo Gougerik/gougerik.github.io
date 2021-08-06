@@ -23,13 +23,13 @@ $(function () {
     window.location.hash = "";
   }
 
-  $(window).bind('scroll', function() {
-    if ($(window).scrollTop() > 1) {
-      $('.navbar').fadeIn(500).addClass('sticky-top');
-    }else {
-      $('.navbar').removeClass('sticky-top');
-    }
-  });
+  // $(window).bind('scroll', function() {
+  //   if ($(window).scrollTop() > 1) {
+  //     $('.navbar').fadeIn(500).addClass('sticky-top');
+  //   }else {
+  //     $('.navbar').removeClass('sticky-top');
+  //   }
+  // });
 
   $('[data-animation="ripple-outline"]').each(function () {
     $(this).prepend('<div class="c-ripple js-ripple ripple-outline-text"></div>');
@@ -68,7 +68,7 @@ $(function () {
   $('.smooth-scroll').click(function(){    
     divId = $(this).attr('href');
     $('html, body').animate({
-      scrollTop: $(divId).offset().top - 54
+      scrollTop: $(divId).offset().top/* - 54*/
     }, 100);
   });
 })
