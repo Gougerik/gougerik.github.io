@@ -28,7 +28,8 @@ canvas.className = 'pixels';
 canvas.height = h;
 canvas.width = w;
 
-let pixels;
+let stop = false;
+let pixels = [];
 
 render = () => {
     document.getElementById('wrapper').appendChild(canvas);
@@ -41,11 +42,20 @@ render = () => {
 }
 
 animate = () => {
-    myReq = requestAnimationFrame(animate);
+    if(!stop) {
+        myReq = requestAnimationFrame(animate);
+    }
     // ctx.clearRect(0,0,w,h);
-    for(let i = 0; i <= pixels.length; i++) {
+    for(let i = 0; i < pixels.length; i++) {
         pixels[i].go();
     }
+}
+
+Stop = () => {
+    stop = true;
+    const p = document.createElement('p');
+    p.innerHTML = 'This is your country :)';
+    document.getElementById('button').replaceWith(p)
 }
 
 document.onload = render(); animate();
