@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Človeče nehnevaj sa</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="win">
+        <h1>Vyhral <span id="winner"></span> hráč!</h1>
+    </div>
+    <div class="controls">
+        <p>Na ťahu je hráč&nbsp;&nbsp;<span id="player"></span></p>
+        <button onclick="Throw()" id="button">Hodiť kocku</button>
+        <p id="amount">0</p>
+    </div>
+    <img src="./desk.svg" alt="Desk" width="500px" height="450px" draggable="false">
+    <div id="wrapper"></div>
+    <!-- SCRIPTS IMPORT -->
+    <script src="./script.js"></script>
+</body>
+</html>

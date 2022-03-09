@@ -24,7 +24,7 @@ html, body {
 }
 
 button {
-    background: none;
+    background-color: #111;
     padding: 1rem 3rem;
     color: #FFF;
     border: 2px solid #FFF;

@@ -1,0 +1,16 @@
+{
+  "name": "skola",
+  "version": "1.0.0",
+  "description": "Človeče nehnevaj sa",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "node-sass ./style.scss ./style.css --output-style compressed -w"
+  },
+  "keywords": [
+    "clovece",
+    "nehnevaj",
+    "sa"
+  ],
+  "author": "Jakub Juhás",
+  "license": "ISC"
+}

@@ -1,6 +1,6 @@
 const RADIUS = 10;
 const SPEED = 5;
-const COLORS = ['aqua','aqua','aqua','lime','lime','lime'];
+const COLORS = ['#044985','#044985','#044985','#32882F','#32882F','#32882F'];
 
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
