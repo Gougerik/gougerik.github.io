@@ -143,6 +143,7 @@ animate = () => {
 
 win = team => {
     stop = true;
+    document.getElementById('button').disabled = true;
     document.getElementById('win').style.transform = 'unset';
     document.getElementById('winner').innerHTML = team ? 'červený' : 'modrý';
 }
@@ -152,7 +153,7 @@ Throw = () => {
         const indicator = document.getElementById('amount');
         random = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 
-        indicator.style.color = '#fff';
+        indicator.style.color = random === 6 ? '#F2D04D' : '#fff';
         indicator.innerHTML = random;
 
         const dispo = characters.filter(i => i.out === false && i.home === false && i.team === player);
